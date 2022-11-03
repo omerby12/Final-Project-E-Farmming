@@ -10,3 +10,46 @@ h3 {
 .rating span {
     margin: 0.1rem;
 }
+
+.btn-green {
+    color: #fff;
+    background-color: #176b25;
+    border-color: #176b25
+}
+
+.btn-green:hover {
+    color: #fff;
+    background-color: #209534;
+    border-color: #26b13d
+}
+
+.btn-green:focus,
+.btn-green.focus {
+    color: #fff;
+    background-color: #209534;
+    border-color: #26b13d;
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(102, 201, 136, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(102, 201, 136, 0.5)
+}
+
+.btn-green.disabled,
+.btn-green:disabled {
+    color: #fff;
+    background-color: #176b25;
+    border-color: #176b25
+}
+
+.btn-green:not(:disabled):not(.disabled):active,
+.btn-green:not(:disabled):not(.disabled).active,
+.show>.btn-green.dropdown-toggle {
+    color: #fff;
+    background-color: #209534;
+    border-color: #26b13d;
+}
+
+.btn-green:not(:disabled):not(.disabled):active:focus,
+.btn-green:not(:disabled):not(.disabled).active:focus,
+.show>.btn-green.dropdown-toggle:focus {
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(102, 201, 136, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(102, 201, 136, 0.5)
+}

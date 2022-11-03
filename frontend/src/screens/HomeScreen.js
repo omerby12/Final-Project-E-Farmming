@@ -6,7 +6,6 @@ import products from '../products';
 const HomeScreen = () => {
   return (
     <React.Fragment>
-      <h1>Latest Products</h1>
       <Row>
         {products.map((product) => (
           <Col key={product._id} sm={12} md={6} Lg={4} xl={3}>

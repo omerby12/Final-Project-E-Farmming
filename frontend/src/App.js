@@ -4,7 +4,7 @@ import { Container } from 'react-bootstrap';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomeScreen from './screens/HomeScreen';
-import ProductsScreen from './screens/ProductsScreen';
+import FarmersScreen from './screens/FarmersScreen';
 import FarmerProductScreen from './screens/FarmerProductScreen';
 
 const App = () => {
@@ -15,7 +15,7 @@ const App = () => {
         <Container>
           <Routes>
             <Route path='/' element={<HomeScreen />} excat />
-            <Route path='/product/:id' element={<ProductsScreen />} />
+            <Route path='/product/:id/farmers' element={<FarmersScreen />} />
             <Route
               path='/farmer-product/:id'
               element={<FarmerProductScreen />}

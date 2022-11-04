@@ -116,7 +116,7 @@ const farmerProducts = [
     countInStock: 5,
   },
   {
-    _id: 7,
+    _id: '7',
     farmer: {
       _id: '3',
       user: {},
@@ -137,7 +137,7 @@ const farmerProducts = [
     countInStock: 12,
   },
   {
-    _id: 8,
+    _id: '8',
     farmer: {
       _id: '1',
       user: {},
@@ -158,7 +158,7 @@ const farmerProducts = [
     countInStock: 6,
   },
   {
-    _id: 9,
+    _id: '9',
     farmer: {
       _id: '1',
       user: {},
@@ -179,7 +179,7 @@ const farmerProducts = [
     countInStock: 12,
   },
   {
-    _id: 10,
+    _id: '10',
     farmer: {
       _id: '4',
       user: {},
@@ -200,7 +200,7 @@ const farmerProducts = [
     countInStock: 12,
   },
   {
-    _id: 11,
+    _id: '11',
     farmer: {
       _id: '1',
       user: {},
@@ -221,7 +221,7 @@ const farmerProducts = [
     countInStock: 10,
   },
   {
-    _id: 13,
+    _id: '13',
     farmer: {
       _id: '3',
       user: {},
@@ -242,7 +242,7 @@ const farmerProducts = [
     countInStock: 10,
   },
   {
-    _id: 14,
+    _id: '14',
     farmer: {
       _id: '1',
       user: {},
@@ -263,7 +263,7 @@ const farmerProducts = [
     countInStock: 10,
   },
   {
-    _id: 16,
+    _id: '16',
     farmer: {
       _id: '5',
       user: {},
@@ -284,7 +284,7 @@ const farmerProducts = [
     countInStock: 10,
   },
   {
-    _id: 17,
+    _id: '17',
     farmer: {
       _id: '5',
       user: {},
@@ -305,7 +305,7 @@ const farmerProducts = [
     countInStock: 12,
   },
   {
-    _id: 18,
+    _id: '18',
     farmer: {
       _id: '5',
       user: {},
@@ -326,7 +326,7 @@ const farmerProducts = [
     countInStock: 12,
   },
   {
-    _id: 19,
+    _id: '19',
     farmer: {
       _id: '3',
       user: {},
@@ -347,7 +347,7 @@ const farmerProducts = [
     countInStock: 6,
   },
   {
-    _id: 20,
+    _id: '20',
     farmer: {
       _id: '4',
       user: {},
@@ -368,7 +368,7 @@ const farmerProducts = [
     countInStock: 6,
   },
   {
-    _id: 23,
+    _id: '23',
     farmer: {
       _id: '2',
       user: {},
@@ -389,7 +389,7 @@ const farmerProducts = [
     countInStock: 6,
   },
   {
-    _id: 24,
+    _id: '24',
     farmer: {
       _id: '2',
       user: {},
@@ -410,7 +410,7 @@ const farmerProducts = [
     countInStock: 12,
   },
   {
-    _id: 26,
+    _id: '26',
     farmer: {
       _id: '4',
       user: {},
@@ -431,7 +431,7 @@ const farmerProducts = [
     countInStock: 10,
   },
   {
-    _id: 27,
+    _id: '27',
     farmer: {
       _id: '2',
       user: {},
@@ -453,7 +453,7 @@ const farmerProducts = [
   },
 
   {
-    _id: 29,
+    _id: '29',
     farmer: {
       _id: '3',
       user: {},
@@ -475,4 +475,4 @@ const farmerProducts = [
   },
 ];
 
-export default farmerProducts;
+module.exports = farmerProducts;

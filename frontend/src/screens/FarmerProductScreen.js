@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
 import Rating from '../components/Rating';
-
-import farmerProducts from '../farmer-products';
+import axios from 'axios';
 
 const FarmerProductScreen = () => {
   const { id } = useParams();
-  const farmerProduct = farmerProducts.find(
-    (farmerProduct) => String(farmerProduct._id) === id
-  );
+  const [farmerProduct, setFarmerProduct] = useState(null);
+
+  useEffect(() => {
+    const fetchFarmerProduct = async () => {
+      const { data } = await axios.get(`/api/farmer-product/${id}`);
+      console.log(data);
+      setFarmerProduct(data);
+    };
+    fetchFarmerProduct();
+  }, [id]);
+
+  if (!farmerProduct) return null;
+
   return (
     <React.Fragment>
       <Link className='btn btn-light my-3' to='/'>

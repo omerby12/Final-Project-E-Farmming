@@ -7,7 +7,11 @@ const FarmerProduct = ({ farmerProduct }) => {
   return (
     <Card className='my-3 p-3 rounded text-center'>
       <Link to={`/farmer-product/${farmerProduct._id}`}>
-        <Card.Img src={farmerProduct.farmer.image} variant='top' />
+        <Card.Img
+          className='farmer-img'
+          src={farmerProduct.farmer.image}
+          variant='top'
+        />
       </Link>
       <Card.Body>
         <Link to={`/farmer-product/${farmerProduct._id}`}>

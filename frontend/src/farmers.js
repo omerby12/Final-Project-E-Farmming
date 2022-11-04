@@ -12,7 +12,7 @@ const farmers = [
     _id: '2',
     user: {},
     farmName: 'The Galilee Market',
-    image: '/images/galilee-market.jpg',
+    image: '/images/the-galilee-market.jpg',
     reviews: {},
     rating: 4.0,
     numReviews: 9,

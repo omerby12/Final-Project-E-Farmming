@@ -10,7 +10,7 @@ const FarmersScreen = () => {
 
   useEffect(() => {
     const fetchFarmers = async () => {
-      const { data } = await axios.get(`/api/product/${id}/farmers`);
+      const { data } = await axios.get(`/api/products/${id}/farmers`);
       setFarmers(data);
     };
     fetchFarmers();

@@ -1,4 +1,5 @@
-//maybe add more
+import mongoose from 'mongoose';
+
 const productSchema = mongoose.Schema(
   {
     name: {

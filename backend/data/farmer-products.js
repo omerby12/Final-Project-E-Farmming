@@ -475,4 +475,4 @@ const farmerProducts = [
   },
 ];
 
-module.exports = farmerProducts;
+export default farmerProducts;

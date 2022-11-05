@@ -46,4 +46,4 @@ const farmers = [
   },
 ];
 
-module.exports = farmers;
+export default farmers;

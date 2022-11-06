@@ -16,11 +16,7 @@ router.get(
     const farmerProducts = await FarmerProduct.find({})
       .populate('farmer')
       .populate('product');
-    if (farmerProducts.length > 0) {
-      res.json(farmerProducts);
-    } else {
-      res.status(404).json({ message: 'Farmer Products not found' });
-    }
+    res.json(farmerProducts);
   })
 );
 
@@ -36,7 +32,8 @@ router.get(
     if (farmerProduct) {
       res.json(farmerProduct);
     } else {
-      res.status(404).json({ message: 'Farmer Product not found' });
+      res.status(404);
+      throw new Error('Farmer Product not found');
     }
   })
 );

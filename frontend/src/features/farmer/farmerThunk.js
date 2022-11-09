@@ -2,7 +2,23 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const listFarmers = createAsyncThunk(
-  'farmer/listFarmers',
+  'product/listFarmers',
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get('/api/farmers');
+      return data;
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+export const listFarmersByProduct = createAsyncThunk(
+  'farmer/listFarmersByProduct',
   async ({ id }, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(`/api/products/${id}/farmers`);

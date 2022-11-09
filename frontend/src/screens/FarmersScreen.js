@@ -1,22 +1,19 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { Row, Col } from 'react-bootstrap';
-import FarmerProduct from '../components/FarmerProduct';
+import Farmer from '../components/Farmer';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { listFarmers } from '../features/farmer/farmerThunk';
 
 const FarmersScreen = () => {
   const dispatch = useDispatch();
-  const { id } = useParams();
 
-  const farmerList = useSelector((state) => state.farmer);
-  const { loading, error, farmers } = farmerList;
+  const farmerState = useSelector((state) => state.farmer);
+  const { loading, error, farmers } = farmerState;
   useEffect(() => {
-    dispatch(listFarmers({ id }));
-  }, [dispatch, id]);
+    dispatch(listFarmers());
+  }, [dispatch]);
 
   return (
     <React.Fragment>
@@ -26,9 +23,9 @@ const FarmersScreen = () => {
         <Message variant='danger'>{error}</Message>
       ) : (
         <Row>
-          {farmers.map((farmerProduct) => (
-            <Col key={farmerProduct._id} sm={12} md={6} Lg={4} xl={3}>
-              <FarmerProduct farmerProduct={farmerProduct} />
+          {farmers.map((farmer) => (
+            <Col key={farmer._id} sm={12} md={6} lg={4} xl={3}>
+              <Farmer farmer={farmer} />
             </Col>
           ))}
         </Row>
@@ -36,4 +33,5 @@ const FarmersScreen = () => {
     </React.Fragment>
   );
 };
+
 export default FarmersScreen;

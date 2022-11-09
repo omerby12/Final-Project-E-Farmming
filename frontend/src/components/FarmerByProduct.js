@@ -3,32 +3,32 @@ import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import Rating from './Rating';
 
-const FarmerProduct = ({ farmerProduct }) => {
+const FarmerByProduct = ({ farmerByProduct }) => {
   return (
     <Card className='my-3 p-3 rounded text-center'>
-      <Link to={`/farmer-product/${farmerProduct._id}`}>
+      <Link to={`/farmer-product/${farmerByProduct._id}`}>
         <Card.Img
           className='farmer-img'
-          src={farmerProduct.farmer.image}
+          src={farmerByProduct.farmer.image}
           variant='top'
         />
       </Link>
       <Card.Body>
-        <Link to={`/farmer-product/${farmerProduct._id}`}>
+        <Link to={`/farmer-product/${farmerByProduct._id}`}>
           <Card.Title as='div'>
-            <strong>{farmerProduct.farmer.name}</strong>
+            <strong>{farmerByProduct.farmer.name}</strong>
           </Card.Title>
         </Link>
       </Card.Body>
       <Card.Text as='div'>
         <Rating
-          value={farmerProduct.farmer.rating}
-          text={`${farmerProduct.farmer.numReviews} reviews`}
+          value={farmerByProduct.farmer.rating}
+          text={`${farmerByProduct.farmer.numReviews} reviews`}
         />
       </Card.Text>
-      <Card.Text as='h3'>{farmerProduct.price}₪/kg</Card.Text>
+      <Card.Text as='h3'>{farmerByProduct.price}₪/kg</Card.Text>
     </Card>
   );
 };
 
-export default FarmerProduct;
+export default FarmerByProduct;

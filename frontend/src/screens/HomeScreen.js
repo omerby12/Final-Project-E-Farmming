@@ -9,8 +9,8 @@ import { listProducts } from '../features/product/productThunk';
 const HomeScreen = () => {
   const dispatch = useDispatch();
 
-  const productList = useSelector((state) => state.product);
-  const { loading, error, products } = productList;
+  const productState = useSelector((state) => state.product);
+  const { loading, error, products } = productState;
   useEffect(() => {
     dispatch(listProducts());
   }, [dispatch]);

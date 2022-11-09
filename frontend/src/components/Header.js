@@ -18,6 +18,21 @@ const Header = () => {
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
+            <Nav className='mr-auto'>
+              <LinkContainer to='/products'>
+                <Nav.Link className='mr-3'>
+                  <i className='fas fa-store'></i> Products
+                </Nav.Link>
+              </LinkContainer>
+
+              <LinkContainer to='/farmers'>
+                <Nav.Link>
+                  <i class='fa-solid fa-wheat-awn'></i> Farmers
+                </Nav.Link>
+              </LinkContainer>
+            </Nav>
+          </Navbar.Collapse>
+          <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='ml-auto'>
               <LinkContainer to='/cart'>
                 <Nav.Link>

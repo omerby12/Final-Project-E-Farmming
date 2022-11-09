@@ -6,41 +6,41 @@ import Farmer from '../models/farmerModel.js';
 
 const router = express.Router();
 
-// @desc Fetch all products
-// @route GET /api/products
+// @desc Fetch all farmers
+// @route GET /api/farmers
 // @access Public
 // @desc
 router.get(
   '/',
   asyncHandler(async (req, res) => {
-    const products = await Product.find({});
-    res.json(products);
+    const farmers = await Farmer.find({});
+    res.json(farmers);
   })
 );
 
-// @desc Fetch single product
-// @route GET /api/products/:id
+// @desc Fetch single farmer
+// @route GET /api/farmers/:id
 // @access Public
 router.get(
   '/:id',
   asyncHandler(async (req, res) => {
-    const product = await Product.findById(req.params.id);
-    if (product) {
-      res.json(product);
+    const farmer = await Farmer.findById(req.params.id);
+    if (farmer) {
+      res.json(farmer);
     } else {
       res.status(404);
-      throw new Error('Product not found');
+      throw new Error('Farmer not found');
     }
   })
 );
 
-// @desc Fetch all farmers products by product
-// @route GET /api/products/:id/farmers
+// @desc Fetch all farmers products by farmer
+// @route GET /api/farmers/:id/products
 // @access Public
 router.get(
-  '/:id/farmers',
+  '/:id/products',
   asyncHandler(async (req, res) => {
-    const farmerProducts = await FarmerProduct.find({ product: req.params.id })
+    const farmerProducts = await FarmerProduct.find({ farmer: req.params.id })
       .populate('farmer')
       .populate('product');
     if (farmerProducts.length > 0) {

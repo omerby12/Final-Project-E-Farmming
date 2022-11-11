@@ -8,6 +8,7 @@ import FarmersScreen from './screens/FarmersScreen';
 import FarmersByProductScreen from './screens/FarmersByProductScreen';
 import ProductsByFarmerScreen from './screens/ProductsByFarmerScreen';
 import FarmerProductScreen from './screens/FarmerProductScreen';
+import CartScreen from './screens/CartScreen';
 
 const App = () => {
   return (
@@ -32,6 +33,8 @@ const App = () => {
               path='/farmer-product/:id'
               element={<FarmerProductScreen />}
             />
+            <Route path='/cart/' element={<CartScreen />} />
+            <Route path='/cart/:id' element={<CartScreen />} />
           </Routes>
         </Container>
       </main>

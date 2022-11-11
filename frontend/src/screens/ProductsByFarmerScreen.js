@@ -6,6 +6,7 @@ import { Row, Col } from 'react-bootstrap';
 import ProductByFarmer from '../components/ProductByFarmer';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import GoBack from '../components/GoBack';
 import { getProductsByFarmer } from '../features/product/productsByFarmerSlice';
 
 const ProductsByFarmerScreen = () => {
@@ -20,6 +21,7 @@ const ProductsByFarmerScreen = () => {
 
   return (
     <React.Fragment>
+      <GoBack />
       {loading ? (
         <Loader />
       ) : error ? (

@@ -6,16 +6,16 @@ import { Row, Col } from 'react-bootstrap';
 import ProductByFarmer from '../components/ProductByFarmer';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import { listProductsByFarmer } from '../features/product/productThunk';
+import { getProductsByFarmer } from '../features/product/productsByFarmerSlice';
 
 const ProductsByFarmerScreen = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const productState = useSelector((state) => state.product);
-  const { loading, error, productsByFarmer } = productState;
+  const productsByFarmerState = useSelector((state) => state.productsByFarmer);
+  const { loading, error, productsByFarmer } = productsByFarmerState;
   useEffect(() => {
-    dispatch(listProductsByFarmer({ id }));
+    dispatch(getProductsByFarmer({ id }));
   }, [dispatch, id]);
 
   return (

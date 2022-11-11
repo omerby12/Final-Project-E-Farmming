@@ -4,15 +4,15 @@ import { Row, Col } from 'react-bootstrap';
 import Farmer from '../components/Farmer';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import { listFarmers } from '../features/farmer/farmerThunk';
+import { getFarmers } from '../features/farmer/farmersSlice';
 
 const FarmersScreen = () => {
   const dispatch = useDispatch();
 
-  const farmerState = useSelector((state) => state.farmer);
-  const { loading, error, farmers } = farmerState;
+  const farmersState = useSelector((state) => state.farmers);
+  const { loading, error, farmers } = farmersState;
   useEffect(() => {
-    dispatch(listFarmers());
+    dispatch(getFarmers());
   }, [dispatch]);
 
   return (

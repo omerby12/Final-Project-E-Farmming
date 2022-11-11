@@ -1,10 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-import productReducer from '../features/product/productSlice';
-import farmerReducer from '../features/farmer/farmerSlice';
+import productsReducer from '../features/product/productsSlice';
+import productsByFarmerReducer from '../features/product/productsByFarmerSlice';
+import farmersReducer from '../features/farmer/farmersSlice';
+import farmersByProductReducer from '../features/farmer/farmersByProductSlice';
 
 export const store = configureStore({
   reducer: {
-    product: productReducer,
-    farmer: farmerReducer,
+    products: productsReducer,
+    productsByFarmer: productsByFarmerReducer,
+    farmers: farmersReducer,
+    farmersByProduct: farmersByProductReducer,
   },
 });

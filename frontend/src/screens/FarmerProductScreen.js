@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
   Row,
   Col,
@@ -10,10 +10,10 @@ import {
   Button,
   Form,
 } from 'react-bootstrap';
-import Rating from '../components/Rating';
-import Message from '../components/Message';
-import Loader from '../components/Loader';
-import GoBack from '../components/GoBack';
+import Rating from '../components/UI/Rating';
+import Message from '../components/UI/Message';
+import Loader from '../components/UI/Loader';
+import GoBack from '../components/UI/GoBack';
 import { getFarmerProductDetails } from '../features/farmerProduct/farmerProductDetailsSlice';
 
 const FarmerProductScreen = () => {

@@ -3,10 +3,10 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Row, Col } from 'react-bootstrap';
-import ProductByFarmer from '../components/ProductByFarmer';
-import Message from '../components/Message';
-import Loader from '../components/Loader';
-import GoBack from '../components/GoBack';
+import ProductByFarmer from '../components/Cards/ProductByFarmer';
+import Message from '../components/UI/Message';
+import Loader from '../components/UI/Loader';
+import GoBack from '../components/UI/GoBack';
 import { getProductsByFarmer } from '../features/product/productsByFarmerSlice';
 
 const ProductsByFarmerScreen = () => {

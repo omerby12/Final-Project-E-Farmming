@@ -9,6 +9,7 @@ import FarmersByProductScreen from './screens/FarmersByProductScreen';
 import ProductsByFarmerScreen from './screens/ProductsByFarmerScreen';
 import FarmerProductScreen from './screens/FarmerProductScreen';
 import CartScreen from './screens/CartScreen';
+import LoginScreen from './screens/LoginScreen';
 
 const App = () => {
   return (
@@ -35,6 +36,7 @@ const App = () => {
             />
             <Route path='/cart/' element={<CartScreen />} />
             <Route path='/cart/:id' element={<CartScreen />} />
+            <Route path='/login' element={<LoginScreen />} />
           </Routes>
         </Container>
       </main>

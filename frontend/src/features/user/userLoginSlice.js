@@ -9,7 +9,7 @@ const initialUserLoginState = {
 
 export const login = createAsyncThunk(
   'user/userLogin',
-  async (_, { rejectWithValue }) => {
+  async ({ email, password }, { rejectWithValue }) => {
     try {
       const config = {
         headers: {

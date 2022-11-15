@@ -8,6 +8,10 @@ import cartReducer from '../features/cart/cartSlice';
 import { cartMiddleware } from '../features/cart/cartMiddleware';
 import userLoginReducer from '../features/user/userLoginSlice';
 
+const cartItemsFromStorage = localStorage.getItem('cartItems')
+  ? JSON.parse(localStorage.getItem('cartItems'))
+  : [];
+
 const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))
   : null;

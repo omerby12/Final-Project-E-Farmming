@@ -10,6 +10,8 @@ import ProductsByFarmerScreen from './screens/ProductsByFarmerScreen';
 import FarmerProductScreen from './screens/FarmerProductScreen';
 import CartScreen from './screens/CartScreen';
 import LoginScreen from './screens/LoginScreen';
+import CustomerRegisterScreen from './screens/CustomerRegisterScreen';
+import FarmerRegisterScreen from './screens/FarmerRegisterScreen';
 
 const App = () => {
   return (
@@ -21,7 +23,6 @@ const App = () => {
             <Route path='/' element={<HomeScreen />} excat />
             <Route path='/products' element={<HomeScreen />} excat />
             <Route path='/farmers' element={<FarmersScreen />} excat />
-
             <Route
               path='/product/:id/farmers'
               element={<FarmersByProductScreen />}
@@ -37,6 +38,11 @@ const App = () => {
             <Route path='/cart/' element={<CartScreen />} />
             <Route path='/cart/:id' element={<CartScreen />} />
             <Route path='/login' element={<LoginScreen />} />
+            <Route
+              path='/register/customer'
+              element={<CustomerRegisterScreen />}
+            />
+            <Route path='/register/farmer' element={<FarmerRegisterScreen />} />
           </Routes>
         </Container>
       </main>

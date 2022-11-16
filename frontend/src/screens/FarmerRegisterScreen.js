@@ -6,15 +6,18 @@ import Message from '../components/UI/Message';
 import Loader from '../components/UI/Loader';
 import FormContainer from '../components/UI/FormContainer';
 import { userActions } from '../features/user/userSlice';
+import { registerFarmer } from '../features/user/userSlice';
 
-import { login } from '../features/user/userSlice';
-
-const LoginScreen = () => {
+const FarmerRegisterScreen = () => {
   const navigate = useNavigate();
   const { search } = useLocation();
-
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [farmName, setFarmName] = useState('');
+
+  const [message, setMessage] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -36,14 +39,30 @@ const LoginScreen = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(login({ email, password }));
+    if (password !== confirmPassword) {
+      setMessage('Passwords do not match');
+    } else {
+      dispatch(registerFarmer({ name, email, password, farmName }));
+    }
   };
+
   return (
     <FormContainer>
-      <h1>Sign In</h1>
+      <h1>Sign Up - New Farmer</h1>
+      {message && <Message variant='danger'>{message}</Message>}
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
+        <Form.Group className='mt-2' controlId='name'>
+          <Form.Label>Farmer Name</Form.Label>
+          <Form.Control
+            type='name'
+            placeholder='Enter name'
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+
         <Form.Group className='mt-2' controlId='email'>
           <Form.Label>Email Address</Form.Label>
           <Form.Control
@@ -53,44 +72,47 @@ const LoginScreen = () => {
             onChange={(e) => setEmail(e.target.value)}
           ></Form.Control>
         </Form.Group>
+
         <Form.Group className='mt-2' controlId='password'>
           <Form.Label>Password</Form.Label>
           <Form.Control
             type='password'
-            placeholder='Enter Password'
+            placeholder='Enter password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
+
+        <Form.Group className='mt-2' controlId='confirmPassword'>
+          <Form.Label>Confirm Password</Form.Label>
+          <Form.Control
+            type='password'
+            placeholder='Confirm password'
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+
+        <Form.Group className='mt-2' controlId='farmName'>
+          <Form.Label>Farm Name</Form.Label>
+          <Form.Control
+            type='text'
+            placeholder='Enter Farm Name'
+            value={farmName}
+            onChange={(e) => setFarmName(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+
         <Button className='mt-3 btn-green' type='submit' variant='primary'>
-          Sign In
+          Register
         </Button>
       </Form>
+
       <Row className='py-3'>
         <Col>
-          New Customer?{' '}
-          <Link
-            to={
-              redirectInUrl
-                ? `/register/customer?redirect=${redirect}`
-                : '/register/customer'
-            }
-          >
-            Register
-          </Link>
-        </Col>
-      </Row>
-      <Row className=''>
-        <Col>
-          New Farmer?{' '}
-          <Link
-            to={
-              redirectInUrl
-                ? `/register/farmer?redirect=${redirect}`
-                : '/register/farmer'
-            }
-          >
-            Register
+          Have an Account?{' '}
+          <Link to={redirectInUrl ? `/login?redirect=${redirect}` : '/login'}>
+            Login
           </Link>
         </Col>
       </Row>
@@ -98,4 +120,4 @@ const LoginScreen = () => {
   );
 };
 
-export default LoginScreen;
+export default FarmerRegisterScreen;

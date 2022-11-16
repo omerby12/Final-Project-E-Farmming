@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import generateToken from '../utils/generateToken.js';
 import User from '../models/userModel.js';
+import Farmer from '../models/farmerModel.js';
 
 // @desc Auth user & get token
 // @route POST /api/users/login
@@ -57,6 +58,56 @@ const registerCustomer = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Register a new farmer
+// @route   POST /api/users/register/farmer
+// @access  Public
+const registerFarmer = asyncHandler(async (req, res) => {
+  const { name, email, password, farmName } = req.body;
+
+  const userExists = await User.findOne({ email });
+
+  if (userExists) {
+    res.status(400);
+    throw new Error('User already exists');
+  }
+
+  const farmerExists = await Farmer.findOne({ farmName: farmName });
+
+  if (farmerExists) {
+    res.status(400);
+    throw new Error('Farm Name already exists');
+  }
+
+  const user = await User.create({
+    name,
+    email,
+    password,
+    isFarmer: true,
+  });
+
+  const farmer = await Farmer.create({
+    user: user._id,
+    farmName: farmName,
+    image: '/images/the-galilee-market.jpg',
+    reviews: [],
+    rating: 0,
+    numReviews: 0,
+  });
+
+  if (user && farmer) {
+    res.status(201).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isFarmer: user.isFarmer,
+      token: generateToken(user._id),
+    });
+  } else {
+    res.status(400);
+    throw new Error('Invalid user data');
+  }
+});
+
 // @desc Get user profile
 // @route GET /api/users/profile
 // @access Private
@@ -75,4 +126,4 @@ const getUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser, getUserProfile, registerCustomer };
+export { authUser, getUserProfile, registerCustomer, registerFarmer };

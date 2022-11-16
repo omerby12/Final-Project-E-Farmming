@@ -9,6 +9,7 @@ export const logout = createAsyncThunk(
       localStorage.removeItem('cartItems');
       dispatch(userLoginActions.userLogout());
       document.location.href = '/login';
+      return;
     } catch (error) {
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);

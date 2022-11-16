@@ -37,7 +37,7 @@ const userLoginSlice = createSlice({
   name: 'userLogin',
   initialState: initialUserLoginState,
   reducers: {
-    logout(state) {
+    userLogout(state) {
       state.loading = false;
       state.userInfo = null;
       state.error = null;

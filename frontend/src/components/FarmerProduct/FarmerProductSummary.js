@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Row, Col, ListGroup, Card, Button, Form } from 'react-bootstrap';
+import { addToCart } from '../../features/cart/cartThunk';
 
 const FarmerProductSummary = ({ farmerProduct }) => {
-  const { id } = useParams();
+  const dispatch = useDispatch();
   const [qty, setQty] = useState(1);
 
   const navigate = useNavigate();
   const addToCartHandler = () => {
-    navigate(`/cart/${id}?qty=${qty}`);
+    const farmerProductId = farmerProduct._id;
+    dispatch(addToCart({ farmerProductId, qty }));
+    navigate('/cart');
   };
 
   return (

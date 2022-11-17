@@ -7,6 +7,8 @@ import farmerProductReducer from '../features/farmerProduct/farmerProductDetails
 import cartReducer from '../features/cart/cartSlice';
 import { cartMiddleware } from '../features/cart/cartMiddleware';
 import userReducer from '../features/user/userSlice';
+import userDetailsReducer from '../features/user/userDetailsSlice';
+import userUpdateProfileReducer from '../features/user/userUpdateProfileSlice';
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')
   ? JSON.parse(localStorage.getItem('cartItems'))
@@ -30,6 +32,8 @@ export const store = configureStore({
     farmerProduct: farmerProductReducer,
     cart: cartReducer,
     user: userReducer,
+    userDetails: userDetailsReducer,
+    userUpdateProfile: userUpdateProfileReducer,
   },
   preloadedState: initialState,
   middleware: (getDefaultMiddleware) =>

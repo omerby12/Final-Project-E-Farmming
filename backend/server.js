@@ -7,20 +7,18 @@ import productRoutes from './routes/productRoutes.js';
 import farmerProductRoutes from './routes/farmerProductRoutes.js';
 import farmerRoutes from './routes/farmerRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import shippingAddressRoutes from './routes/shippingAddressRoutes.js';
 
 dotenv.config();
 connectDB();
 const app = express();
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('API is running ...');
-});
-
 app.use('/api/products', productRoutes);
 app.use('/api/farmer-products', farmerProductRoutes);
 app.use('/api/farmers', farmerRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/shipping-address', shippingAddressRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

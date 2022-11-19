@@ -18,29 +18,27 @@ const groupBy = (req, list, keyGetter) => {
       collection.push(item);
     }
   });
-  const orders = [...map].map(([key, value]) => ({
+  const subOrders = [...map].map(([key, value]) => ({
     orderItems: value,
     totalPrice: Number(getPrice(value)),
-    user: req.user._id,
     shippingAddress: req.body.shippingAddress,
-    paymentMethod: req.body.paymentMethod,
   }));
-  return orders;
+  return subOrders;
 };
 
-const orderToOrders = (req, res, next) => {
+const orderToSubOrders = (req, res, next) => {
   if (req.body.orderItems && req.body.orderItems.length === 0) {
     res.status(400);
     throw new Error('No order items');
   } else {
-    const orders = groupBy(
+    const subOrders = groupBy(
       req,
       req.body.orderItems,
       (orderItem) => orderItem.farmerId
     );
-    req.orders = orders;
+    req.subOrders = subOrders;
     next();
   }
 };
 
-export { orderToOrders };
+export { orderToSubOrders };

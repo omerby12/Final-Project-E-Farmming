@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/UI/Message';
 import FormContainer from '../components/UI/FormContainer';
 import CheckoutSteps from '../components/UI/CheckoutSteps';
-import { createOrders } from '../features/order/createOrdersSlice';
+import { createOrder } from '../features/order/createOrderSlice';
 
 const PlaceOrderScreen = () => {
   const dispatch = useDispatch();
@@ -45,7 +45,7 @@ const PlaceOrderScreen = () => {
 
   const placeOrderHandler = () => {
     dispatch(
-      createOrders({
+      createOrder({
         order: {
           orderItems: cartItems,
           shippingAddress: shippingAddressInfo,
@@ -117,8 +117,8 @@ const PlaceOrderScreen = () => {
                         </Col>
 
                         <Col className='m-auto' md={4}>
-                          {item.qty} x ${item.price} = $
-                          {Number(item.qty * item.price).toFixed(2)}
+                          {item.qty} x {item.price}₪ ={' '}
+                          {Number(item.qty * item.price).toFixed(2)}₪
                         </Col>
                       </Row>
                     </ListGroup.Item>
@@ -138,7 +138,7 @@ const PlaceOrderScreen = () => {
               <ListGroup.Item>
                 <Row className='d-flex justify-content-between text-center'>
                   <Col>Total</Col>
-                  <Col>${cartTotalPrice}</Col>
+                  <Col>{cartTotalPrice}₪</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>

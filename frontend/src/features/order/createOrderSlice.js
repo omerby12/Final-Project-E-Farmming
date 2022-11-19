@@ -1,15 +1,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const initialCreateOrdersState = {
-  orders: {},
+const initialCreateOrderState = {
+  order: {},
   success: false,
   loading: false,
   error: null,
 };
 
-export const createOrders = createAsyncThunk(
-  'order/createOrders',
+export const createOrder = createAsyncThunk(
+  'order/createOrder',
   async ({ order }, { getState, rejectWithValue }) => {
     try {
       const userInfo = getState().user.userInfo;
@@ -31,32 +31,32 @@ export const createOrders = createAsyncThunk(
   }
 );
 
-const createOrdersSlice = createSlice({
-  name: 'createOrders',
-  initialState: initialCreateOrdersState,
+const createOrderSlice = createSlice({
+  name: 'createOrder',
+  initialState: initialCreateOrderState,
   reducers: {},
   extraReducers: {
-    // setShippingAddress
-    [createOrders.pending]: (state) => {
+    // createOrder
+    [createOrder.pending]: (state) => {
       state.loading = true;
-      state.orders = null;
+      state.order = null;
       state.success = false;
       state.error = null;
     },
-    [createOrders.fulfilled]: (state, { payload }) => {
+    [createOrder.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.success = true;
       state.error = null;
-      state.orders = payload;
+      state.order = payload;
     },
-    [createOrders.rejected]: (state, { payload }) => {
+    [createOrder.rejected]: (state, { payload }) => {
       state.loading = false;
       state.success = false;
       state.error = payload;
-      state.orders = null;
+      state.order = null;
     },
   },
 });
 
-export const createOrdersActions = createOrdersSlice.actions;
-export default createOrdersSlice.reducer;
+export const createOrderActions = createOrderSlice.actions;
+export default createOrderSlice.reducer;

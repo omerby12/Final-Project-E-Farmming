@@ -7,26 +7,13 @@ const orderSchema = mongoose.Schema(
       required: true,
       ref: 'User',
     },
-    orderItems: [
+    subOrders: [
       {
-        farmerName: { type: String, required: true },
-        farmerImage: { type: String, required: true },
-        productName: { type: String, required: true },
-        productImage: { type: String, required: true },
-        qty: { type: Number, required: true },
-        price: { type: Number, required: true },
-        farmerProduct: {
-          type: mongoose.Schema.Types.ObjectId,
-          required: true,
-          ref: 'FarmerProduct',
-        },
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'SubOrder',
       },
     ],
-    shippingAddress: {
-      address: { type: String, required: true },
-      city: { type: String, required: true },
-      postalCode: { type: String, required: true },
-    },
     paymentMethod: {
       type: String,
       required: true,
@@ -48,14 +35,6 @@ const orderSchema = mongoose.Schema(
       default: false,
     },
     paidAt: {
-      type: Date,
-    },
-    isDelivered: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
-    deliveredAt: {
       type: Date,
     },
   },

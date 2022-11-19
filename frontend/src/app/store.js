@@ -10,6 +10,7 @@ import userReducer from '../features/user/userSlice';
 import userDetailsReducer from '../features/user/userDetailsSlice';
 import userUpdateProfileReducer from '../features/user/userUpdateProfileSlice';
 import shippingAddressReducer from '../features/shippingAddress/shippingAddressSlice';
+import userSessionReducer from '../features/userSession/userSessionSlice';
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')
   ? JSON.parse(localStorage.getItem('cartItems'))
@@ -36,6 +37,7 @@ export const store = configureStore({
     userDetails: userDetailsReducer,
     userUpdateProfile: userUpdateProfileReducer,
     shippingAddress: shippingAddressReducer,
+    userSession: userSessionReducer,
   },
   preloadedState: initialState,
   middleware: (getDefaultMiddleware) =>

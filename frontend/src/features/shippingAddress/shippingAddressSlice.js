@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const initialShippingAddressState = {
-  shippingAddressInfo: { address: '', city: '', postalCode: '' },
+  shippingAddressInfo: { address: null, city: null, postalCode: null },
   success: false,
   loading: false,
   error: null,

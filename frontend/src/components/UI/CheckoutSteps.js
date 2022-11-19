@@ -17,7 +17,7 @@ const CheckoutSteps = ({ activeStep }) => {
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map((step, index) =>
           index <= activeStep ? (
-            <LinkContainer to={step.to}>
+            <LinkContainer key={step.label} to={step.to}>
               <Step key={step.label}>
                 <StepLabel>{step.label}</StepLabel>
               </Step>

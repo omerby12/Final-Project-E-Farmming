@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import CheckoutSteps from '../components/UI/CheckoutSteps';
@@ -89,11 +88,9 @@ const ShippingScreen = () => {
               onChange={(e) => setPostalCode(e.target.value)}
             ></Form.Control>
           </Form.Group>
-          <div className='mt-4 d-flex justify-content-between'>
-            <Button className='btn-green' type='submit' variant='primary'>
-              Continue
-            </Button>
-          </div>
+          <Button className='mt-3 btn-green' type='submit' variant='primary'>
+            Continue
+          </Button>
         </Form>
       )}
     </FormContainer>

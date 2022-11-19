@@ -8,6 +8,7 @@ import farmerProductRoutes from './routes/farmerProductRoutes.js';
 import farmerRoutes from './routes/farmerRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import shippingAddressRoutes from './routes/shippingAddressRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
 
 dotenv.config();
 connectDB();
@@ -19,6 +20,7 @@ app.use('/api/farmer-products', farmerProductRoutes);
 app.use('/api/farmers', farmerRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/shipping-address', shippingAddressRoutes);
+app.use('/api/orders', orderRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

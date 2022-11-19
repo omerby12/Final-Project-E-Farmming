@@ -6,8 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/UI/Message';
 import FormContainer from '../components/UI/FormContainer';
 import CheckoutSteps from '../components/UI/CheckoutSteps';
+import { createOrders } from '../features/order/createOrdersSlice';
 
 const PlaceOrderScreen = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
@@ -42,7 +44,16 @@ const PlaceOrderScreen = () => {
   ).toFixed(2);
 
   const placeOrderHandler = () => {
-    console.log('order');
+    dispatch(
+      createOrders({
+        order: {
+          orderItems: cartItems,
+          shippingAddress: shippingAddressInfo,
+          paymentMethod: paymentMethod,
+          totalPrice: cartTotalPrice,
+        },
+      })
+    );
   };
 
   return (

@@ -16,6 +16,7 @@ export const addToCart = createAsyncThunk(
         farmerImage: data.farmer.image,
         price: data.price,
         countInStock: data.countInStock,
+        farmerId: data.farmer._id,
         qty,
       };
 

@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import FarmerProduct from '../components/FarmerProduct/FarmerProduct';
-import Message from '../components/UI/Message';
-import Loader from '../components/UI/Loader';
-import GoBack from '../components/UI/GoBack';
-import { getFarmerProductDetails } from '../features/farmerProduct/farmerProductDetailsSlice';
+import FarmerProduct from '../../components/FarmerProduct/FarmerProduct';
+import Message from '../../components/UI/Message';
+import Loader from '../../components/UI/Loader';
+import GoBack from '../../components/UI/GoBack';
+import { getFarmerProductDetails } from '../../features/farmerProduct/farmerProductDetailsSlice';
 
 const FarmerProductScreen = () => {
   const dispatch = useDispatch();

@@ -2,15 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import CheckoutSteps from '../components/UI/CheckoutSteps';
-import FormContainer from '../components/UI/FormContainer';
-import Message from '../components/UI/Message';
-import Loader from '../components/UI/Loader';
-
+import CheckoutSteps from '../../components/UI/CheckoutSteps';
+import FormContainer from '../../components/UI/FormContainer';
+import Message from '../../components/UI/Message';
+import Loader from '../../components/UI/Loader';
 import {
   getShippingAddress,
   setShippingAddress,
-} from '../features/shippingAddress/shippingAddressSlice';
+} from '../../features/shippingAddress/shippingAddressSlice';
 
 const ShippingScreen = () => {
   const [address, setAddress] = useState();

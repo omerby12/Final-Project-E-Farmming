@@ -6,7 +6,7 @@ import SubOrder from '../models/subOrderModel.js';
 // @route   POST /api/orders
 // @access  Private
 const createSubOrders = asyncHandler(async (req, res) => {
-  const { orderItems, paymentMethod, totalPrice } = req.body;
+  const { orderItems, shippingAddress, paymentMethod, totalPrice } = req.body;
   if (orderItems && orderItems.length === 0) {
     res.status(400);
     throw new Error('No order items');
@@ -14,6 +14,7 @@ const createSubOrders = asyncHandler(async (req, res) => {
     const createdSubOrders = await SubOrder.insertMany(req.subOrders);
     const createdOrder = await Order.create({
       user: req.user._id,
+      shippingAddress,
       subOrders: createdSubOrders.map((subOrder) => subOrder._id),
       paymentMethod,
       totalPrice,
@@ -22,4 +23,20 @@ const createSubOrders = asyncHandler(async (req, res) => {
   }
 });
 
-export { createSubOrders };
+// @desc    Get order by ID
+// @route   GET /api/orders/:id
+// @access  Private
+const getOrderById = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id)
+    .populate('user', 'name email')
+    .populate('subOrders');
+
+  if (order) {
+    res.json(order);
+  } else {
+    res.status(404);
+    throw new Error('Order not found');
+  }
+});
+
+export { createSubOrders, getOrderById };

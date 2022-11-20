@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import Message from '../components/UI/Message';
-import FormContainer from '../components/UI/FormContainer';
-import CheckoutSteps from '../components/UI/CheckoutSteps';
-import { createOrder } from '../features/order/createOrderSlice';
+import Message from '../../components/UI/Message';
+import FormContainer from '../../components/UI/FormContainer';
+import CheckoutSteps from '../../components/UI/CheckoutSteps';
+import { orderCreate } from '../../features/order/orderCreateSlice';
 
 const PlaceOrderScreen = () => {
   const dispatch = useDispatch();
@@ -43,9 +43,19 @@ const PlaceOrderScreen = () => {
     )
   ).toFixed(2);
 
+  const orderCreateState = useSelector((state) => state.orderCreate);
+  const { order, success, error } = orderCreateState;
+
+  useEffect(() => {
+    if (success) {
+      navigate(`/order/${order._id}`);
+    }
+    // eslint-disable-next-line
+  }, [navigate, success]);
+
   const placeOrderHandler = () => {
     dispatch(
-      createOrder({
+      orderCreate({
         order: {
           orderItems: cartItems,
           shippingAddress: shippingAddressInfo,

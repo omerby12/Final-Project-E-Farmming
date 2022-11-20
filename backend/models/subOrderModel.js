@@ -32,9 +32,6 @@ const subOrderSchema = mongoose.Schema(
       required: true,
       default: false,
     },
-    deliveredAt: {
-      type: Date,
-    },
   },
   {
     timestamps: true,

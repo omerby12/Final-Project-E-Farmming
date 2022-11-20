@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import Message from '../components/UI/Message';
-import Loader from '../components/UI/Loader';
-import FormContainer from '../components/UI/FormContainer';
-import { userActions } from '../features/user/userSlice';
-
-import { login } from '../features/user/userSlice';
+import Message from '../../components/UI/Message';
+import Loader from '../../components/UI/Loader';
+import FormContainer from '../../components/UI/FormContainer';
+import { userActions } from '../../features/user/userSlice';
+import { login } from '../../features/user/userSlice';
 
 const LoginScreen = () => {
   const navigate = useNavigate();

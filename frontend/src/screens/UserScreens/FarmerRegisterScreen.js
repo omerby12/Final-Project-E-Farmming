@@ -2,19 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import Message from '../components/UI/Message';
-import Loader from '../components/UI/Loader';
-import FormContainer from '../components/UI/FormContainer';
-import { userActions } from '../features/user/userSlice';
-import { registerCustomer } from '../features/user/userSlice';
+import Message from '../../components/UI/Message';
+import Loader from '../../components/UI/Loader';
+import FormContainer from '../../components/UI/FormContainer';
+import { userActions } from '../../features/user/userSlice';
+import { registerFarmer } from '../../features/user/userSlice';
 
-const CustomerRegisterScreen = () => {
+const FarmerRegisterScreen = () => {
   const navigate = useNavigate();
   const { search } = useLocation();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [farmName, setFarmName] = useState('');
+
   const [message, setMessage] = useState(null);
 
   const dispatch = useDispatch();
@@ -40,19 +42,19 @@ const CustomerRegisterScreen = () => {
     if (password !== confirmPassword) {
       setMessage('Passwords do not match');
     } else {
-      dispatch(registerCustomer({ name, email, password }));
+      dispatch(registerFarmer({ name, email, password, farmName }));
     }
   };
 
   return (
     <FormContainer>
-      <h1>Sign Up - New Customer</h1>
+      <h1>Sign Up - New Farmer</h1>
       {message && <Message variant='danger'>{message}</Message>}
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
         <Form.Group className='mt-2' controlId='name'>
-          <Form.Label>Name</Form.Label>
+          <Form.Label>Farmer Name</Form.Label>
           <Form.Control
             type='name'
             placeholder='Enter name'
@@ -72,7 +74,7 @@ const CustomerRegisterScreen = () => {
         </Form.Group>
 
         <Form.Group className='mt-2' controlId='password'>
-          <Form.Label>Password Address</Form.Label>
+          <Form.Label>Password</Form.Label>
           <Form.Control
             type='password'
             placeholder='Enter password'
@@ -88,6 +90,16 @@ const CustomerRegisterScreen = () => {
             placeholder='Confirm password'
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+
+        <Form.Group className='mt-2' controlId='farmName'>
+          <Form.Label>Farm Name</Form.Label>
+          <Form.Control
+            type='text'
+            placeholder='Enter Farm Name'
+            value={farmName}
+            onChange={(e) => setFarmName(e.target.value)}
           ></Form.Control>
         </Form.Group>
 
@@ -108,4 +120,4 @@ const CustomerRegisterScreen = () => {
   );
 };
 
-export default CustomerRegisterScreen;
+export default FarmerRegisterScreen;

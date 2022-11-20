@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import Message from '../components/UI/Message';
-import Loader from '../components/UI/Loader';
-import { getUserDetails } from '../features/user/userDetailsSlice';
-import { updateUserProfile } from '../features/user/userUpdateProfileSlice';
+import Message from '../../components/UI/Message';
+import Loader from '../../components/UI/Loader';
+import { getUserDetails } from '../../features/user/userDetailsSlice';
+import { updateUserProfile } from '../../features/user/userUpdateProfileSlice';
 
 const ProfileScreen = () => {
   const navigate = useNavigate();

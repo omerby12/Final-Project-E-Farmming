@@ -3,19 +3,24 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
-import HomeScreen from './screens/HomeScreen';
-import FarmersScreen from './screens/FarmersScreen';
-import FarmersByProductScreen from './screens/FarmersByProductScreen';
-import ProductsByFarmerScreen from './screens/ProductsByFarmerScreen';
-import FarmerProductScreen from './screens/FarmerProductScreen';
-import CartScreen from './screens/CartScreen';
-import LoginScreen from './screens/LoginScreen';
-import CustomerRegisterScreen from './screens/CustomerRegisterScreen';
-import FarmerRegisterScreen from './screens/FarmerRegisterScreen';
-import ProfileScreen from './screens/ProfileScreen';
-import ShippingScreen from './screens/ShippingScreen';
-import PaymentScreen from './screens/PaymentScreen';
-import PlaceOrderScreen from './screens/PlaceOrderScreen';
+
+import HomeScreen from './screens/ShoppingProcessScreens/HomeScreen';
+import FarmersScreen from './screens/ShoppingProcessScreens/FarmersScreen';
+import FarmersByProductScreen from './screens/ShoppingProcessScreens/FarmersByProductScreen';
+import ProductsByFarmerScreen from './screens/ShoppingProcessScreens/ProductsByFarmerScreen';
+import FarmerProductScreen from './screens/ShoppingProcessScreens/FarmerProductScreen';
+
+import CartScreen from './screens/CartScreens/CartScreen';
+
+import LoginScreen from './screens/UserScreens/LoginScreen';
+import CustomerRegisterScreen from './screens/UserScreens/CustomerRegisterScreen';
+import FarmerRegisterScreen from './screens/UserScreens/FarmerRegisterScreen';
+import ProfileScreen from './screens/UserScreens/ProfileScreen';
+
+import ShippingScreen from './screens/CheckoutProcessScreens/ShippingScreen';
+import PaymentScreen from './screens/CheckoutProcessScreens/PaymentScreen';
+import PlaceOrderScreen from './screens/CheckoutProcessScreens/PlaceOrderScreen';
+import OrderScreen from './screens/CheckoutProcessScreens/OrderScreen';
 
 const App = () => {
   return (
@@ -51,6 +56,7 @@ const App = () => {
             <Route path='/shipping' element={<ShippingScreen />} />
             <Route path='/payment' element={<PaymentScreen />} />
             <Route path='/placeorder' element={<PlaceOrderScreen />} />
+            <Route path='/order/:id' element={<OrderScreen />} />
           </Routes>
         </Container>
       </main>

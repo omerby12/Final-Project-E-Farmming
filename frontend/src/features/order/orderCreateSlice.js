@@ -1,15 +1,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const initialCreateOrderState = {
+const initialOrderCreateState = {
   order: {},
   success: false,
   loading: false,
   error: null,
 };
 
-export const createOrder = createAsyncThunk(
-  'order/createOrder',
+export const orderCreate = createAsyncThunk(
+  'order/orderCreate',
   async ({ order }, { getState, rejectWithValue }) => {
     try {
       const userInfo = getState().user.userInfo;
@@ -31,25 +31,25 @@ export const createOrder = createAsyncThunk(
   }
 );
 
-const createOrderSlice = createSlice({
-  name: 'createOrder',
-  initialState: initialCreateOrderState,
+const orderCreateSlice = createSlice({
+  name: 'orderCreate',
+  initialState: initialOrderCreateState,
   reducers: {},
   extraReducers: {
     // createOrder
-    [createOrder.pending]: (state) => {
+    [orderCreate.pending]: (state) => {
       state.loading = true;
       state.order = null;
       state.success = false;
       state.error = null;
     },
-    [createOrder.fulfilled]: (state, { payload }) => {
+    [orderCreate.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.success = true;
       state.error = null;
       state.order = payload;
     },
-    [createOrder.rejected]: (state, { payload }) => {
+    [orderCreate.rejected]: (state, { payload }) => {
       state.loading = false;
       state.success = false;
       state.error = payload;
@@ -58,5 +58,5 @@ const createOrderSlice = createSlice({
   },
 });
 
-export const createOrderActions = createOrderSlice.actions;
-export default createOrderSlice.reducer;
+export const orderCreateActions = orderCreateSlice.actions;
+export default orderCreateSlice.reducer;

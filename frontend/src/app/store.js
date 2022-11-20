@@ -13,6 +13,7 @@ import shippingAddressReducer from '../features/shippingAddress/shippingAddressS
 import userSessionReducer from '../features/userSession/userSessionSlice';
 import orderCreateReducer from '../features/order/orderCreateSlice';
 import orderDetailsReducer from '../features/order/orderDetailsSlice';
+import subOrderDetailsReducer from '../features/order/subOrderDetailsSlice';
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')
   ? JSON.parse(localStorage.getItem('cartItems'))
@@ -42,6 +43,7 @@ export const store = configureStore({
     userSession: userSessionReducer,
     orderCreate: orderCreateReducer,
     orderDetails: orderDetailsReducer,
+    subOrderDetails: subOrderDetailsReducer,
   },
   preloadedState: initialState,
   middleware: (getDefaultMiddleware) =>

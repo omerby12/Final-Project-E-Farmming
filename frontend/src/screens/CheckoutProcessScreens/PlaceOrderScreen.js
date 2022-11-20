@@ -6,7 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/UI/Message';
 import FormContainer from '../../components/UI/FormContainer';
 import CheckoutSteps from '../../components/UI/CheckoutSteps';
-import { orderCreate } from '../../features/order/orderCreateSlice';
+import {
+  orderCreateActions,
+  orderCreate,
+} from '../../features/order/orderCreateSlice';
 
 const PlaceOrderScreen = () => {
   const dispatch = useDispatch();
@@ -49,6 +52,7 @@ const PlaceOrderScreen = () => {
   useEffect(() => {
     if (success) {
       navigate(`/order/${order._id}`);
+      dispatch(orderCreateActions.clearOrderCreateData());
     }
     // eslint-disable-next-line
   }, [navigate, success]);

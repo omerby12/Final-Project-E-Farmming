@@ -19,6 +19,7 @@ const groupBy = (req, list, keyGetter) => {
     }
   });
   const subOrders = [...map].map(([key, value]) => ({
+    user: req.user._id,
     orderItems: value,
     totalPrice: Number(getPrice(value)),
     shippingAddress: req.body.shippingAddress,

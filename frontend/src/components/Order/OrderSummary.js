@@ -13,7 +13,7 @@ const OrderSummary = ({ order }) => {
           <ListGroup.Item>
             <Row>
               <Col>Total</Col>
-              <Col>${order.totalPrice}₪</Col>
+              <Col>{order.totalPrice}₪</Col>
             </Row>
           </ListGroup.Item>
         </ListGroup>

@@ -39,4 +39,20 @@ const getOrderById = asyncHandler(async (req, res) => {
   }
 });
 
-export { createSubOrders, getOrderById };
+// @desc    Get sub order by ID
+// @route   GET /api/orders/:id/suborder/:subOrderId
+// @access  Private
+const getSubOrderById = asyncHandler(async (req, res) => {
+  const subOrder = await SubOrder.findById(req.params.subOrderId).populate(
+    'user',
+    'name email'
+  );
+  if (subOrder) {
+    res.json(subOrder);
+  } else {
+    res.status(404);
+    throw new Error('SubOrder not found');
+  }
+});
+
+export { createSubOrders, getOrderById, getSubOrderById };

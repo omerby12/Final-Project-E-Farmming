@@ -34,7 +34,14 @@ export const orderCreate = createAsyncThunk(
 const orderCreateSlice = createSlice({
   name: 'orderCreate',
   initialState: initialOrderCreateState,
-  reducers: {},
+  reducers: {
+    clearOrderCreateData(state) {
+      state.loading = false;
+      state.order = null;
+      state.success = false;
+      state.error = null;
+    },
+  },
   extraReducers: {
     // createOrder
     [orderCreate.pending]: (state) => {

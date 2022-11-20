@@ -2,8 +2,18 @@ import mongoose from 'mongoose';
 
 const subOrderSchema = mongoose.Schema(
   {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',
+    },
     orderItems: [
       {
+        farmerId: {
+          type: mongoose.Schema.Types.ObjectId,
+          required: true,
+          ref: 'Farmer',
+        },
         farmerName: { type: String, required: true },
         farmerImage: { type: String, required: true },
         productName: { type: String, required: true },

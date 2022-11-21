@@ -32,10 +32,12 @@ const farmersSlice = createSlice({
     [getFarmers.pending]: (state) => {
       state.loading = true;
       state.farmers = [];
+      state.error = null;
     },
     [getFarmers.fulfilled]: (state, { payload }) => {
       state.farmers = payload;
       state.loading = false;
+      state.error = null;
     },
     [getFarmers.rejected]: (state, { payload }) => {
       state.loading = false;

@@ -1,15 +1,16 @@
 import express from 'express';
 const router = express.Router();
 import {
-  createSubOrders,
+  createOrder,
   getOrderById,
   getSubOrderById,
+  updateOrderToPaid,
 } from '../controllers/orderController.js';
 import { protect } from '../middleware/authMiddleware.js';
 import { orderToSubOrders } from '../middleware/orderMiddleware.js';
 
-router.route('/').post(protect, orderToSubOrders, createSubOrders);
+router.route('/').post(protect, orderToSubOrders, createOrder);
 router.route('/:id').get(protect, getOrderById);
 router.route('/:id/suborder/:subOrderId').get(protect, getSubOrderById);
-
+router.route('/:id/pay').put(protect, updateOrderToPaid);
 export default router;

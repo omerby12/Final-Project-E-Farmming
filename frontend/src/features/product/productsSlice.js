@@ -32,10 +32,12 @@ const productsSlice = createSlice({
     [getProducts.pending]: (state) => {
       state.loading = true;
       state.products = [];
+      state.error = null;
     },
     [getProducts.fulfilled]: (state, { payload }) => {
       state.products = payload;
       state.loading = false;
+      state.error = null;
     },
     [getProducts.rejected]: (state, { payload }) => {
       state.loading = false;

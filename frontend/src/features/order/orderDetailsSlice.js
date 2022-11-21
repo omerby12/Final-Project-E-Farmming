@@ -38,10 +38,12 @@ const orderDetailsSlice = createSlice({
     [getOrderDetails.pending]: (state) => {
       state.loading = true;
       state.order = {};
+      state.error = null;
     },
     [getOrderDetails.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.order = payload;
+      state.error = null;
     },
     [getOrderDetails.rejected]: (state, { payload }) => {
       state.loading = false;

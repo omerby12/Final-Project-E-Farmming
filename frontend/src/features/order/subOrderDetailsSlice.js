@@ -46,10 +46,12 @@ const subOrderDetailsSlice = createSlice({
     [getSubOrderDetails.pending]: (state) => {
       state.loading = true;
       state.subOrder = {};
+      state.error = null;
     },
     [getSubOrderDetails.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.subOrder = payload;
+      state.error = null;
     },
     [getSubOrderDetails.rejected]: (state, { payload }) => {
       state.loading = false;

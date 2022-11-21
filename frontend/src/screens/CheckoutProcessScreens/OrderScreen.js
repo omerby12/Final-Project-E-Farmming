@@ -5,6 +5,7 @@ import Order from '../../components/Order/Order';
 import Message from '../../components/UI/Message';
 import Loader from '../../components/UI/Loader';
 import { getOrderDetails } from '../../features/order/orderDetailsSlice';
+import { orderPayActions } from '../../features/order/orderPaySlice';
 
 const OrderScreen = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const OrderScreen = () => {
   const { order, loading, error } = orderDetailsState;
 
   useEffect(() => {
+    dispatch(orderPayActions.orderPayReset());
     dispatch(getOrderDetails({ orderId }));
   }, [dispatch, orderId]);
 

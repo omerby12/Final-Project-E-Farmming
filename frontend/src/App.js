@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import Header from './components/Layout/Header';
@@ -24,49 +27,71 @@ import OrderScreen from './screens/CheckoutProcessScreens/OrderScreen';
 import SubOrderScreen from './screens/CheckoutProcessScreens/SubOrderScreen';
 
 const App = () => {
+  const [clientID, setClientID] = useState('');
+  useEffect(() => {
+    const getClientId = async () => {
+      const { data: clientId } = await axios.get('/api/config/paypal');
+      setClientID(clientId);
+    };
+
+    if (!window.paypal) {
+      getClientId();
+    }
+  }, []);
   return (
-    <Router>
-      <Header />
-      <main className='py-3'>
-        <Container>
-          <Routes>
-            <Route path='/' element={<HomeScreen />} excat />
-            <Route path='/products' element={<HomeScreen />} excat />
-            <Route path='/farmers' element={<FarmersScreen />} excat />
-            <Route
-              path='/product/:id/farmers'
-              element={<FarmersByProductScreen />}
-            />
-            <Route
-              path='/farmer/:id/products'
-              element={<ProductsByFarmerScreen />}
-            />
-            <Route
-              path='/farmer-product/:id'
-              element={<FarmerProductScreen />}
-            />
-            <Route path='/cart/' element={<CartScreen />} />
-            <Route path='/cart/:id' element={<CartScreen />} />
-            <Route path='/login' element={<LoginScreen />} />
-            <Route
-              path='/register/customer'
-              element={<CustomerRegisterScreen />}
-            />
-            <Route path='/register/farmer' element={<FarmerRegisterScreen />} />
-            <Route path='/profile' element={<ProfileScreen />} />
-            <Route path='/shipping' element={<ShippingScreen />} />
-            <Route path='/payment' element={<PaymentScreen />} />
-            <Route path='/placeorder' element={<PlaceOrderScreen />} />
-            <Route path='/order/:id' element={<OrderScreen />} />
-            <Route
-              path='/order/:id/suborder/:subOrderId'
-              element={<SubOrderScreen />}
-            />
-          </Routes>
-        </Container>
-      </main>
-      <Footer />
-    </Router>
+    <React.Fragment>
+      {clientID && (
+        <PayPalScriptProvider
+          options={{ 'client-id': clientID, currency: 'ILS' }}
+        >
+          <Router>
+            <Header />
+            <main className='py-3'>
+              <Container>
+                <Routes>
+                  <Route path='/' element={<HomeScreen />} excat />
+                  <Route path='/products' element={<HomeScreen />} excat />
+                  <Route path='/farmers' element={<FarmersScreen />} excat />
+                  <Route
+                    path='/product/:id/farmers'
+                    element={<FarmersByProductScreen />}
+                  />
+                  <Route
+                    path='/farmer/:id/products'
+                    element={<ProductsByFarmerScreen />}
+                  />
+                  <Route
+                    path='/farmer-product/:id'
+                    element={<FarmerProductScreen />}
+                  />
+                  <Route path='/cart/' element={<CartScreen />} />
+                  <Route path='/cart/:id' element={<CartScreen />} />
+                  <Route path='/login' element={<LoginScreen />} />
+                  <Route
+                    path='/register/customer'
+                    element={<CustomerRegisterScreen />}
+                  />
+                  <Route
+                    path='/register/farmer'
+                    element={<FarmerRegisterScreen />}
+                  />
+                  <Route path='/profile' element={<ProfileScreen />} />
+                  <Route path='/shipping' element={<ShippingScreen />} />
+                  <Route path='/payment' element={<PaymentScreen />} />
+                  <Route path='/placeorder' element={<PlaceOrderScreen />} />
+                  <Route path='/order/:id' element={<OrderScreen />} />
+                  <Route
+                    path='/order/:id/suborder/:subOrderId'
+                    element={<SubOrderScreen />}
+                  />
+                </Routes>
+              </Container>
+            </main>
+            <Footer />
+          </Router>
+        </PayPalScriptProvider>
+      )}
+    </React.Fragment>
   );
 };
 

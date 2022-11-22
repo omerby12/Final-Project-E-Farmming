@@ -1,4 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
+import { userDetailsActions } from '../user/userDetailsSlice';
+import { orderListMyActions } from '../order/orderListMySlice';
 import axios from 'axios';
 
 const initialUserState = {
@@ -35,10 +38,12 @@ export const login = createAsyncThunk(
 
 export const logout = createAsyncThunk(
   'user/userLogout',
-  async (_, { rejectWithValue, fulfillWithValue }) => {
+  async (_, { rejectWithValue, fulfillWithValue, dispatch }) => {
     try {
       localStorage.removeItem('userInfo');
       localStorage.removeItem('cartItems');
+      dispatch(userDetailsActions.clearUserDetailsData());
+      dispatch(orderListMyActions.clearOrderListMyData());
       document.location.href = '/login';
       return fulfillWithValue();
     } catch (error) {
@@ -110,6 +115,7 @@ const userSlice = createSlice({
     clearUserData(state) {
       state.loading = false;
       state.error = null;
+      state.userInfo = null;
     },
   },
   extraReducers: {

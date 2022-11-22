@@ -1,24 +1,23 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const initialUserDetailsState = {
-  user: {},
+const initialOrderListMyState = {
+  orders: [],
   loading: false,
   error: null,
 };
 
-export const getUserDetails = createAsyncThunk(
-  'user/userDetails',
+export const getMyOrderList = createAsyncThunk(
+  'order/getMyOrderList',
   async (_, { getState, rejectWithValue }) => {
     try {
       const userInfo = getState().user.userInfo;
       const config = {
         headers: {
-          'Content-Type': 'application/json',
           Authorization: `Bearer ${userInfo.token}`,
         },
       };
-      const { data } = await axios.get(`/api/users/profile`, config);
+      const { data } = await axios.get(`/api/orders/myorders`, config);
       return data;
     } catch (error) {
       if (error.response && error.response.data.message) {
@@ -30,34 +29,35 @@ export const getUserDetails = createAsyncThunk(
   }
 );
 
-const userDetailsSlice = createSlice({
-  name: 'userDetails',
-  initialState: initialUserDetailsState,
+const orderListMySlice = createSlice({
+  name: 'orderListMy',
+  initialState: initialOrderListMyState,
   reducers: {
-    clearUserDetailsData(state) {
+    clearOrderListMyData(state) {
       state.loading = false;
-      state.user = {};
+      state.orders = [];
       state.error = null;
     },
   },
   extraReducers: {
-    // getUserDetails
-    [getUserDetails.pending]: (state) => {
+    // getMyOrderList
+    [getMyOrderList.pending]: (state) => {
       state.loading = true;
+      state.orders = [];
       state.error = null;
     },
-    [getUserDetails.fulfilled]: (state, { payload }) => {
-      state.user = payload;
+    [getMyOrderList.fulfilled]: (state, { payload }) => {
       state.loading = false;
+      state.orders = payload;
       state.error = null;
     },
-    [getUserDetails.rejected]: (state, { payload }) => {
+    [getMyOrderList.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
-      state.user = null;
+      state.orders = [];
     },
   },
 });
 
-export const userDetailsActions = userDetailsSlice.actions;
-export default userDetailsSlice.reducer;
+export const orderListMyActions = orderListMySlice.actions;
+export default orderListMySlice.reducer;

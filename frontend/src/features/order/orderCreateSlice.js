@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { cartActions } from '../cart/cartSlice';
 import axios from 'axios';
 
 const initialOrderCreateState = {
@@ -10,7 +11,7 @@ const initialOrderCreateState = {
 
 export const orderCreate = createAsyncThunk(
   'order/orderCreate',
-  async ({ order }, { getState, rejectWithValue }) => {
+  async ({ order }, { getState, rejectWithValue, dispatch }) => {
     try {
       const userInfo = getState().user.userInfo;
       const config = {
@@ -20,6 +21,8 @@ export const orderCreate = createAsyncThunk(
         },
       };
       const { data } = await axios.post(`/api/orders`, order, config);
+      localStorage.removeItem('cartItems');
+      dispatch(cartActions.clearCartData());
       return data;
     } catch (error) {
       if (error.response && error.response.data.message) {

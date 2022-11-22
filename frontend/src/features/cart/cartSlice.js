@@ -9,6 +9,9 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState: initialCartState,
   reducers: {
+    clearCartData(state) {
+      state.cartItems = [];
+    },
     removeItemFromCart(state, action) {
       state.cartItems = state.cartItems.filter(
         (x) => x.farmerProduct !== action.payload.id

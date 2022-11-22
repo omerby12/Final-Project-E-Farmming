@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-
+import { cartActions } from '../cart/cartSlice';
 import { userDetailsActions } from '../user/userDetailsSlice';
 import { orderListMyActions } from '../order/orderListMySlice';
 import axios from 'axios';
@@ -42,6 +42,7 @@ export const logout = createAsyncThunk(
     try {
       localStorage.removeItem('userInfo');
       localStorage.removeItem('cartItems');
+      dispatch(cartActions.clearCartData());
       dispatch(userDetailsActions.clearUserDetailsData());
       dispatch(orderListMyActions.clearOrderListMyData());
       document.location.href = '/login';
@@ -115,7 +116,6 @@ const userSlice = createSlice({
     clearUserData(state) {
       state.loading = false;
       state.error = null;
-      state.userInfo = null;
     },
   },
   extraReducers: {

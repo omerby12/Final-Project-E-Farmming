@@ -6,7 +6,7 @@ import Message from '../../components/UI/Message';
 import Loader from '../../components/UI/Loader';
 import { getProducts } from '../../features/product/productsSlice';
 
-const HomeScreen = () => {
+const CustomerHomeScreen = () => {
   const dispatch = useDispatch();
 
   const productsState = useSelector((state) => state.products);
@@ -34,4 +34,4 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default CustomerHomeScreen;

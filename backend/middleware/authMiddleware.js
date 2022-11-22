@@ -27,11 +27,11 @@ const protect = asyncHandler(async (req, res, next) => {
 });
 
 const farmer = (req, res, next) => {
-  if (req.user && req.user.isFarmer) {
+  if (req.user && req.user.role === 'farmer') {
     next();
   } else {
     res.status(401);
-    throw new Error('Not authorized as an farmer');
+    throw new Error('Not authorized as a farmer');
   }
 };
 

@@ -26,29 +26,38 @@ const Header = () => {
           <LinkContainer to='/'>
             <Navbar.Brand>E-Farming</Navbar.Brand>
           </LinkContainer>
-          <Navbar.Toggle aria-controls='basic-navbar-nav' />
-          <Navbar.Collapse id='basic-navbar-nav'>
-            <Nav className='mr-auto'>
-              <LinkContainer to='/products'>
-                <Nav.Link className='mr-3'>
-                  <i className='fas fa-store'></i> Products
-                </Nav.Link>
-              </LinkContainer>
 
-              <LinkContainer to='/farmers'>
-                <Nav.Link>
-                  <i class='fa-solid fa-wheat-awn'></i> Farmers
-                </Nav.Link>
-              </LinkContainer>
-            </Nav>
-          </Navbar.Collapse>
+          {(userInfo?.role === 'customer' || !userInfo) && (
+            <Navbar.Collapse id='basic-navbar-nav'>
+              <Nav className='mr-auto'>
+                <LinkContainer to='/products'>
+                  <Nav.Link className='mr-3'>
+                    <i className='fas fa-store'></i> Products
+                  </Nav.Link>
+                </LinkContainer>
+                <LinkContainer to='/farmers'>
+                  <Nav.Link className='mr-3'>
+                    <i class='fa-solid fa-wheat-awn'></i> Farmers
+                  </Nav.Link>
+                </LinkContainer>
+                {userInfo && (
+                  <LinkContainer to='/myorders'>
+                    <Nav.Link>My Orders</Nav.Link>
+                  </LinkContainer>
+                )}
+              </Nav>
+            </Navbar.Collapse>
+          )}
+
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='ml-auto'>
-              <LinkContainer to='/cart'>
-                <Nav.Link>
-                  <i className='fas fa-shopping-cart'></i> Cart
-                </Nav.Link>
-              </LinkContainer>
+              {(userInfo?.role === 'customer' || !userInfo) && (
+                <LinkContainer to='/cart'>
+                  <Nav.Link>
+                    <i className='fas fa-shopping-cart'></i> Cart
+                  </Nav.Link>
+                </LinkContainer>
+              )}
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id='username'>
                   <LinkContainer to='/profile'>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 
@@ -7,7 +8,7 @@ import { Container } from 'react-bootstrap';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
 
-import HomeScreen from './screens/ShoppingProcessScreens/HomeScreen';
+import CustomerHomeScreen from './screens/ShoppingProcessScreens/CustomerHomeScreen';
 import FarmersScreen from './screens/ShoppingProcessScreens/FarmersScreen';
 import FarmersByProductScreen from './screens/ShoppingProcessScreens/FarmersByProductScreen';
 import ProductsByFarmerScreen from './screens/ShoppingProcessScreens/ProductsByFarmerScreen';
@@ -19,6 +20,7 @@ import LoginScreen from './screens/UserScreens/LoginScreen';
 import CustomerRegisterScreen from './screens/UserScreens/CustomerRegisterScreen';
 import FarmerRegisterScreen from './screens/UserScreens/FarmerRegisterScreen';
 import ProfileScreen from './screens/UserScreens/ProfileScreen';
+import UserOrdersScreen from './screens/UserScreens/UserOrdersScreen';
 
 import ShippingScreen from './screens/CheckoutProcessScreens/ShippingScreen';
 import PaymentScreen from './screens/CheckoutProcessScreens/PaymentScreen';
@@ -27,6 +29,10 @@ import OrderScreen from './screens/CheckoutProcessScreens/OrderScreen';
 import SubOrderScreen from './screens/CheckoutProcessScreens/SubOrderScreen';
 
 const App = () => {
+  const user = useSelector((state) => state.user);
+  const { userInfo } = user;
+  console.log(userInfo);
+
   const [clientID, setClientID] = useState('');
   useEffect(() => {
     const getClientId = async () => {
@@ -49,8 +55,15 @@ const App = () => {
             <main className='py-3'>
               <Container>
                 <Routes>
-                  <Route path='/' element={<HomeScreen />} excat />
-                  <Route path='/products' element={<HomeScreen />} excat />
+                  {userInfo?.role !== 'farmer' && (
+                    <Route path='/' element={<CustomerHomeScreen />} excat />
+                  )}
+
+                  <Route
+                    path='/products'
+                    element={<CustomerHomeScreen />}
+                    excat
+                  />
                   <Route path='/farmers' element={<FarmersScreen />} excat />
                   <Route
                     path='/product/:id/farmers'
@@ -76,6 +89,8 @@ const App = () => {
                     element={<FarmerRegisterScreen />}
                   />
                   <Route path='/profile' element={<ProfileScreen />} />
+                  <Route path='/myorders' element={<UserOrdersScreen />} />
+
                   <Route path='/shipping' element={<ShippingScreen />} />
                   <Route path='/payment' element={<PaymentScreen />} />
                   <Route path='/placeorder' element={<PlaceOrderScreen />} />

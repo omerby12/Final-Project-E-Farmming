@@ -16,7 +16,7 @@ const authUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
-      isFarmer: user.isFarmer,
+      role: user.role,
       token: generateToken(user._id),
     });
   } else {
@@ -49,7 +49,7 @@ const registerCustomer = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
-      isFarmer: user.isFarmer,
+      role: user.role,
       token: generateToken(user._id),
     });
   } else {
@@ -82,7 +82,7 @@ const registerFarmer = asyncHandler(async (req, res) => {
     name,
     email,
     password,
-    isFarmer: true,
+    role: 'farmer',
   });
 
   const farmer = await Farmer.create({
@@ -99,7 +99,7 @@ const registerFarmer = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
-      isFarmer: user.isFarmer,
+      role: user.role,
       token: generateToken(user._id),
     });
   } else {
@@ -118,7 +118,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
-      isFarmer: user.isFarmer,
+      role: user.role,
     });
   } else {
     res.status(404);
@@ -145,7 +145,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       _id: updatedUser._id,
       name: updatedUser.name,
       email: updatedUser.email,
-      isFarmer: user.isFarmer,
+      role: updatedUser.role,
       token: generateToken(updatedUser._id),
     });
   } else {

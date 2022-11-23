@@ -28,10 +28,11 @@ import PlaceOrderScreen from './screens/CheckoutProcessScreens/PlaceOrderScreen'
 import OrderScreen from './screens/CheckoutProcessScreens/OrderScreen';
 import SubOrderScreen from './screens/CheckoutProcessScreens/SubOrderScreen';
 
+import FarmerProductListScreen from './screens/FarmerUserScreens/FarmerProductListScreen';
+
 const App = () => {
   const user = useSelector((state) => state.user);
   const { userInfo } = user;
-  console.log(userInfo);
 
   const [clientID, setClientID] = useState('');
   useEffect(() => {
@@ -58,7 +59,13 @@ const App = () => {
                   {userInfo?.role !== 'farmer' && (
                     <Route path='/' element={<CustomerHomeScreen />} excat />
                   )}
-
+                  {userInfo?.role === 'farmer' && (
+                    <Route
+                      path='/'
+                      element={<FarmerProductListScreen />}
+                      excat
+                    />
+                  )}
                   <Route
                     path='/products'
                     element={<CustomerHomeScreen />}
@@ -90,7 +97,6 @@ const App = () => {
                   />
                   <Route path='/profile' element={<ProfileScreen />} />
                   <Route path='/myorders' element={<UserOrdersScreen />} />
-
                   <Route path='/shipping' element={<ShippingScreen />} />
                   <Route path='/payment' element={<PaymentScreen />} />
                   <Route path='/placeorder' element={<PlaceOrderScreen />} />
@@ -98,6 +104,10 @@ const App = () => {
                   <Route
                     path='/order/:id/suborder/:subOrderId'
                     element={<SubOrderScreen />}
+                  />
+                  <Route
+                    path='/farmer/farmerproductlist'
+                    element={<FarmerProductListScreen />}
                   />
                 </Routes>
               </Container>

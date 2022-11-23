@@ -7,6 +7,7 @@ import {
   registerFarmer,
   updateUserProfile,
 } from '../controllers/userController.js';
+
 import { protect } from '../middleware/authMiddleware.js';
 
 router.route('/register/customer').post(registerCustomer);

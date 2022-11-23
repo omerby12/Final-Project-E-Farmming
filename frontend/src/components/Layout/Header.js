@@ -49,6 +49,21 @@ const Header = () => {
             </Navbar.Collapse>
           )}
 
+          {userInfo && userInfo?.role === 'farmer' && (
+            <Navbar.Collapse id='basic-navbar-nav'>
+              <Nav className='mr-auto'>
+                <LinkContainer to='/farmer/farmerproductlist'>
+                  <Nav.Link className='mr-3'>
+                    <i className='fas fa-store'></i> My Products
+                  </Nav.Link>
+                </LinkContainer>
+                <LinkContainer to='/farmer/orderlist'>
+                  <Nav.Link className='mr-3'>Orders</Nav.Link>
+                </LinkContainer>
+              </Nav>
+            </Navbar.Collapse>
+          )}
+
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='ml-auto'>
               {(userInfo?.role === 'customer' || !userInfo) && (

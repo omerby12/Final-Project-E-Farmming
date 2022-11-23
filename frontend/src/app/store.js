@@ -16,6 +16,7 @@ import orderDetailsReducer from '../features/order/orderDetailsSlice';
 import subOrderDetailsReducer from '../features/order/subOrderDetailsSlice';
 import orderPayReducer from '../features/order/orderPaySlice';
 import orderListMyReducer from '../features/order/orderListMySlice';
+import farmerByUserReducer from '../features/farmer/farmerByUserSlice';
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')
   ? JSON.parse(localStorage.getItem('cartItems'))
@@ -48,6 +49,7 @@ export const store = configureStore({
     subOrderDetails: subOrderDetailsReducer,
     orderPay: orderPayReducer,
     orderListMy: orderListMyReducer,
+    farmerByUser: farmerByUserReducer,
   },
   preloadedState: initialState,
   middleware: (getDefaultMiddleware) =>

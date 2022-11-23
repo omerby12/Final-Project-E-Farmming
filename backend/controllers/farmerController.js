@@ -11,11 +11,11 @@ const getFarmers = asyncHandler(async (req, res) => {
   res.json(farmers);
 });
 
-// @desc Fetch single farmer
+// @desc Fetch single farmer by user id
 // @route GET /api/farmers/:id
 // @access Public
-const getFarmerById = asyncHandler(async (req, res) => {
-  const farmer = await Farmer.findById(req.params.id);
+const getFarmerByUserId = asyncHandler(async (req, res) => {
+  const farmer = await Farmer.findOne({ user: req.params.id });
   if (farmer) {
     res.json(farmer);
   } else {
@@ -39,4 +39,4 @@ const getFarmerProductsByFarmer = asyncHandler(async (req, res) => {
   }
 });
 
-export { getFarmers, getFarmerById, getFarmerProductsByFarmer };
+export { getFarmers, getFarmerByUserId, getFarmerProductsByFarmer };

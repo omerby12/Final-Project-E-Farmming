@@ -30,6 +30,9 @@ import SubOrderScreen from './screens/CheckoutProcessScreens/SubOrderScreen';
 
 import FarmerProductListScreen from './screens/FarmerUserScreens/FarmerProductListScreen';
 
+import AdminProductListScreen from './screens/AdminScreens/AdminProductListScreen';
+import ProductEditScreen from './screens/AdminScreens/ProductEditScreen';
+
 const App = () => {
   const user = useSelector((state) => state.user);
   const { userInfo } = user;
@@ -56,13 +59,21 @@ const App = () => {
             <main className='py-3'>
               <Container>
                 <Routes>
-                  {userInfo?.role !== 'farmer' && (
+                  {userInfo?.role === 'customer' && (
                     <Route path='/' element={<CustomerHomeScreen />} excat />
                   )}
                   {userInfo?.role === 'farmer' && (
                     <Route
                       path='/'
                       element={<FarmerProductListScreen />}
+                      excat
+                    />
+                  )}
+
+                  {userInfo?.role === 'admin' && (
+                    <Route
+                      path='/'
+                      element={<AdminProductListScreen />}
                       excat
                     />
                   )}
@@ -106,8 +117,17 @@ const App = () => {
                     element={<SubOrderScreen />}
                   />
                   <Route
-                    path='/farmer/farmerproductlist'
+                    path='/farmer/productlist'
                     element={<FarmerProductListScreen />}
+                  />
+
+                  <Route
+                    path='/admin/productlist'
+                    element={<AdminProductListScreen />}
+                  />
+                  <Route
+                    path='/admin/product/:id/edit'
+                    element={<ProductEditScreen />}
                   />
                 </Routes>
               </Container>

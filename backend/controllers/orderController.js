@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import Order from '../models/orderModel.js';
 import SubOrder from '../models/subOrderModel.js';
+import FarmerProduct from '../models/farmerProductModel.js';
 
 // @desc    Create new order
 // @route   POST /api/orders
@@ -19,6 +20,16 @@ const createOrder = asyncHandler(async (req, res) => {
       paymentMethod,
       totalPrice,
     });
+
+    orderItems.forEach(async (orderItem) => {
+      const farmerProduct = await FarmerProduct.findById(
+        orderItem.farmerProduct
+      );
+      farmerProduct.countInStock =
+        farmerProduct.countInStock - Number(orderItem.qty);
+      await farmerProduct.save();
+    });
+
     return res.status(201).json(createdOrder);
   }
 });

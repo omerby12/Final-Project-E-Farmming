@@ -23,7 +23,7 @@ const OrderScreen = () => {
 
   return (
     <React.Fragment>
-      <LinkContainer to={`/profile`}>
+      <LinkContainer to={`/myorders`}>
         <Button className='btn btn-light my-3' variant='light'>
           My Orders
         </Button>

@@ -63,7 +63,10 @@ const FarmerProductListScreen = () => {
           <h1>My Products</h1>
         </Col>
         <Col className='text-right'>
-          <Button className='my-3' onClick={uploadFarmerProductHandler}>
+          <Button
+            className='my-3 btn-green'
+            onClick={uploadFarmerProductHandler}
+          >
             <i className='fas fa-plus'></i> Upload Product
           </Button>
         </Col>

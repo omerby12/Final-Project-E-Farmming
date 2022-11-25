@@ -1,29 +1,25 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { cartActions } from '../cart/cartSlice';
 import axios from 'axios';
 
-const initialOrderCreateState = {
-  order: {},
+const initialProductCreateState = {
+  product: {},
   success: false,
   loading: false,
   error: null,
 };
 
-export const orderCreate = createAsyncThunk(
-  'order/orderCreate',
-  async ({ order }, { getState, rejectWithValue, dispatch }) => {
+export const productCreate = createAsyncThunk(
+  'product/productCreate',
+  async (_, { getState, rejectWithValue }) => {
     try {
       const userInfo = getState().user.userInfo;
       const config = {
         headers: {
-          'Content-Type': 'application/json',
           Authorization: `Bearer ${userInfo.token}`,
         },
       };
-      console.log(order);
-      const { data } = await axios.post(`/api/orders`, order, config);
-      localStorage.removeItem('cartItems');
-      dispatch(cartActions.clearCartData());
+
+      const { data } = await axios.post(`/api/products`, {}, config);
       return data;
     } catch (error) {
       if (error.response && error.response.data.message) {
@@ -35,39 +31,39 @@ export const orderCreate = createAsyncThunk(
   }
 );
 
-const orderCreateSlice = createSlice({
-  name: 'orderCreate',
-  initialState: initialOrderCreateState,
+const productCreateSlice = createSlice({
+  name: 'productCreate',
+  initialState: initialProductCreateState,
   reducers: {
-    clearOrderCreateData(state) {
+    clearProductCreateData(state) {
       state.loading = false;
-      state.order = null;
+      state.product = null;
       state.success = false;
       state.error = null;
     },
   },
   extraReducers: {
-    // createOrder
-    [orderCreate.pending]: (state) => {
+    // createProduct
+    [productCreate.pending]: (state) => {
       state.loading = true;
-      state.order = null;
+      state.product = null;
       state.success = false;
       state.error = null;
     },
-    [orderCreate.fulfilled]: (state, { payload }) => {
+    [productCreate.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.success = true;
       state.error = null;
-      state.order = payload;
+      state.product = payload;
     },
-    [orderCreate.rejected]: (state, { payload }) => {
+    [productCreate.rejected]: (state, { payload }) => {
       state.loading = false;
       state.success = false;
       state.error = payload;
-      state.order = null;
+      state.product = null;
     },
   },
 });
 
-export const orderCreateActions = orderCreateSlice.actions;
-export default orderCreateSlice.reducer;
+export const productCreateActions = productCreateSlice.actions;
+export default productCreateSlice.reducer;

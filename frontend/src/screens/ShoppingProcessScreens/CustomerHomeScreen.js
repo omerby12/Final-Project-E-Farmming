@@ -4,7 +4,10 @@ import { Row, Col } from 'react-bootstrap';
 import Product from '../../components/Cards/Product';
 import Message from '../../components/UI/Message';
 import Loader from '../../components/UI/Loader';
-import { getProducts } from '../../features/product/productsSlice';
+import {
+  getProducts,
+  productsActions,
+} from '../../features/product/productsSlice';
 
 const CustomerHomeScreen = () => {
   const dispatch = useDispatch();
@@ -13,6 +16,10 @@ const CustomerHomeScreen = () => {
   const { loading, error, products } = productsState;
   useEffect(() => {
     dispatch(getProducts());
+  }, [dispatch]);
+
+  useEffect(() => {
+    return () => dispatch(productsActions.clearProductsData());
   }, [dispatch]);
 
   return (

@@ -8,7 +8,7 @@ const initialFarmerProductDetailsState = {
 };
 
 export const getFarmerProductDetails = createAsyncThunk(
-  'product/getFarmerProductDetails',
+  'farmerProduct/getFarmerProductDetails',
   async ({ id }, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(`/api/farmer-products/${id}`);
@@ -26,13 +26,17 @@ export const getFarmerProductDetails = createAsyncThunk(
 const farmerProductDetailsSlice = createSlice({
   name: 'farmerProductDetails',
   initialState: initialFarmerProductDetailsState,
-  reducers: {},
+  reducers: {
+    clearFarmerProductDetailsData(state) {
+      state.loading = false;
+      state.farmerProduct = {};
+      state.error = null;
+    },
+  },
   extraReducers: {
     // getFarmerProductDetails
     [getFarmerProductDetails.pending]: (state) => {
       state.loading = true;
-      state.farmerProduct = {};
-      state.error = null;
     },
     [getFarmerProductDetails.fulfilled]: (state, { payload }) => {
       state.farmerProduct = payload;

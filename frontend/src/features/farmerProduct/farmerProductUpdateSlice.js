@@ -1,19 +1,16 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const initialFarmerProductCreateState = {
+const initialFarmerProductUpdateState = {
   farmerProduct: {},
   success: false,
   loading: false,
   error: null,
 };
 
-export const farmerProductCreate = createAsyncThunk(
-  'farmerProduct/farmerProductCreate',
-  async (
-    { farmerId, productId, price, countInStock },
-    { getState, rejectWithValue }
-  ) => {
+export const farmerProductUpdate = createAsyncThunk(
+  'farmerProduct/farmerProductUpdate',
+  async ({ id, price, countInStock }, { getState, rejectWithValue }) => {
     try {
       const userInfo = getState().user.userInfo;
       const config = {
@@ -21,12 +18,11 @@ export const farmerProductCreate = createAsyncThunk(
           Authorization: `Bearer ${userInfo.token}`,
         },
       };
-      const { data } = await axios.post(
-        `/api/farmer-products`,
-        { farmerId, productId, price, countInStock },
+      const { data } = await axios.put(
+        `/api/farmer-products/${id}`,
+        { price, countInStock },
         config
       );
-
       return data;
     } catch (error) {
       if (error.response && error.response.data.message) {
@@ -38,11 +34,11 @@ export const farmerProductCreate = createAsyncThunk(
   }
 );
 
-const farmerProductCreateSlice = createSlice({
-  name: 'farmerProductCreate',
-  initialState: initialFarmerProductCreateState,
+const farmerProductUpdateSlice = createSlice({
+  name: 'farmerProductUpdate',
+  initialState: initialFarmerProductUpdateState,
   reducers: {
-    clearFarmerProductCreateData(state) {
+    clearFarmerProductUpdateData(state) {
       state.loading = false;
       state.farmerProduct = {};
       state.success = false;
@@ -50,20 +46,20 @@ const farmerProductCreateSlice = createSlice({
     },
   },
   extraReducers: {
-    // farmerProductCreate
-    [farmerProductCreate.pending]: (state) => {
+    // farmerProductUpdate
+    [farmerProductUpdate.pending]: (state) => {
       state.loading = true;
       state.farmerProduct = {};
       state.success = false;
       state.error = null;
     },
-    [farmerProductCreate.fulfilled]: (state, { payload }) => {
+    [farmerProductUpdate.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.success = true;
       state.error = null;
       state.farmerProduct = payload;
     },
-    [farmerProductCreate.rejected]: (state, { payload }) => {
+    [farmerProductUpdate.rejected]: (state, { payload }) => {
       state.loading = false;
       state.success = false;
       state.error = payload;
@@ -72,5 +68,5 @@ const farmerProductCreateSlice = createSlice({
   },
 });
 
-export const farmerProductCreateActions = farmerProductCreateSlice.actions;
-export default farmerProductCreateSlice.reducer;
+export const farmerProductUpdateActions = farmerProductUpdateSlice.actions;
+export default farmerProductUpdateSlice.reducer;

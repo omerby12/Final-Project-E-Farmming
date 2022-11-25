@@ -51,4 +51,27 @@ const createFarmerProduct = asyncHandler(async (req, res) => {
   }
 });
 
-export { getFarmerProducts, getFarmerProductById, createFarmerProduct };
+// @desc    Update a farmer product
+// @route   PUT /api/farmer-products/:id
+// @access  Private/Farmer
+const updateFarmerProduct = asyncHandler(async (req, res) => {
+  const { price, countInStock } = req.body;
+  const farmerProduct = await FarmerProduct.findById(req.params.id);
+
+  if (farmerProduct) {
+    farmerProduct.price = price;
+    farmerProduct.countInStock = countInStock;
+    const updatedFarmerProduct = await farmerProduct.save();
+    res.json(updatedFarmerProduct);
+  } else {
+    res.status(404);
+    throw new Error('Farmer Product not found');
+  }
+});
+
+export {
+  getFarmerProducts,
+  getFarmerProductById,
+  createFarmerProduct,
+  updateFarmerProduct,
+};

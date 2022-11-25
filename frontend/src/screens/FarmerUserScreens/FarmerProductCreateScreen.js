@@ -113,7 +113,6 @@ const FarmerProductCreateScreen = () => {
   return (
     <React.Fragment>
       <GoBack />
-      <FormContainer></FormContainer>
       <FormContainer>
         {loadingCreate && <Loader />}
         {errorCreate && <Message variant='danger'>{errorCreate}</Message>}

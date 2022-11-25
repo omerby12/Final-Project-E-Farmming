@@ -5,7 +5,10 @@ import FarmerProduct from '../../components/FarmerProduct/FarmerProduct';
 import Message from '../../components/UI/Message';
 import Loader from '../../components/UI/Loader';
 import GoBack from '../../components/UI/GoBack';
-import { getFarmerProductDetails } from '../../features/farmerProduct/farmerProductDetailsSlice';
+import {
+  getFarmerProductDetails,
+  farmerProductDetailsActions,
+} from '../../features/farmerProduct/farmerProductDetailsSlice';
 
 const FarmerProductScreen = () => {
   const dispatch = useDispatch();
@@ -17,6 +20,12 @@ const FarmerProductScreen = () => {
   useEffect(() => {
     dispatch(getFarmerProductDetails({ id }));
   }, [dispatch, id]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(farmerProductDetailsActions.clearFarmerProductDetailsData());
+    };
+  }, [dispatch]);
 
   return (
     <React.Fragment>

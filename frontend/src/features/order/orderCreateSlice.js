@@ -20,7 +20,6 @@ export const orderCreate = createAsyncThunk(
           Authorization: `Bearer ${userInfo.token}`,
         },
       };
-      console.log(order);
       const { data } = await axios.post(`/api/orders`, order, config);
       localStorage.removeItem('cartItems');
       dispatch(cartActions.clearCartData());

@@ -28,4 +28,27 @@ const getFarmerProductById = asyncHandler(async (req, res) => {
   }
 });
 
-export { getFarmerProducts, getFarmerProductById };
+// @desc    Create a farmer product
+// @route   POST /api/farmer-products
+// @access  Private/Farmer
+const createFarmerProduct = asyncHandler(async (req, res) => {
+  const { farmerId, productId, price, countInStock } = req.body;
+  const farmerProducts = await FarmerProduct.find({
+    product: productId,
+    farmer: farmerId,
+  });
+  if (farmerProducts.length > 0) {
+    res.status(404);
+    throw new Error('Farmer Product alreday exists');
+  } else {
+    const farmerProduct = await FarmerProduct.create({
+      farmer: farmerId,
+      product: productId,
+      price,
+      countInStock,
+    });
+    res.status(201).json(farmerProduct);
+  }
+});
+
+export { getFarmerProducts, getFarmerProductById, createFarmerProduct };

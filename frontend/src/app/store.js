@@ -8,6 +8,8 @@ import productUpdateReducer from '../features/product/productUpdateSlice';
 import farmersReducer from '../features/farmer/farmersSlice';
 import farmersByProductReducer from '../features/farmer/farmersByProductSlice';
 import farmerProductReducer from '../features/farmerProduct/farmerProductDetailsSlice';
+import farmerProductCreateReducer from '../features/farmerProduct/farmerProductCreateSlice';
+
 import cartReducer from '../features/cart/cartSlice';
 import { cartMiddleware } from '../features/cart/cartMiddleware';
 import userReducer from '../features/user/userSlice';
@@ -45,6 +47,7 @@ export const store = configureStore({
     farmers: farmersReducer,
     farmersByProduct: farmersByProductReducer,
     farmerProduct: farmerProductReducer,
+    farmerProductCreate: farmerProductCreateReducer,
     cart: cartReducer,
     user: userReducer,
     userDetails: userDetailsReducer,

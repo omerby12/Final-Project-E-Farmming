@@ -26,8 +26,6 @@ const FarmerProductListScreen = () => {
   const productsByFarmerState = useSelector((state) => state.productsByFarmer);
   const { loading, error, productsByFarmer } = productsByFarmerState;
 
-  // console.log(productsByFarmer);
-
   useEffect(() => {
     if (userInfo && userInfo?.role === 'farmer') {
       dispatch(getFarmerByUser({ id: userInfo._id }));
@@ -52,8 +50,8 @@ const FarmerProductListScreen = () => {
     }
   };
 
-  const uploadFarmerProductHandler = (product) => {
-    //   CREATE FARMER PRODUCT
+  const createFarmerProductHandler = () => {
+    navigate('/farmer/farmerproduct/create');
   };
 
   return (
@@ -65,9 +63,9 @@ const FarmerProductListScreen = () => {
         <Col className='text-right'>
           <Button
             className='my-3 btn-green'
-            onClick={uploadFarmerProductHandler}
+            onClick={createFarmerProductHandler}
           >
-            <i className='fas fa-plus'></i> Upload Product
+            <i className='fas fa-plus'></i> Create New Product
           </Button>
         </Col>
       </Row>

@@ -70,7 +70,6 @@ const ProductEditScreen = () => {
   return (
     <React.Fragment>
       <GoBack />
-      <FormContainer></FormContainer>
       <FormContainer>
         <h1>Edit Product</h1>
         {loadingUpdate && <Loader />}

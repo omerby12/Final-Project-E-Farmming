@@ -29,6 +29,7 @@ import OrderScreen from './screens/CheckoutProcessScreens/OrderScreen';
 import SubOrderScreen from './screens/CheckoutProcessScreens/SubOrderScreen';
 
 import FarmerProductListScreen from './screens/FarmerUserScreens/FarmerProductListScreen';
+import FarmerProductCreateScreen from './screens/FarmerUserScreens/FarmerProductCreateScreen';
 
 import AdminProductListScreen from './screens/AdminScreens/AdminProductListScreen';
 import ProductEditScreen from './screens/AdminScreens/ProductEditScreen';
@@ -119,6 +120,11 @@ const App = () => {
                   <Route
                     path='/farmer/productlist'
                     element={<FarmerProductListScreen />}
+                  />
+
+                  <Route
+                    path='/farmer/farmerproduct/create'
+                    element={<FarmerProductCreateScreen />}
                   />
 
                   <Route

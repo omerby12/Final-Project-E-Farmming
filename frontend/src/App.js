@@ -65,6 +65,11 @@ const App = () => {
                   {(userInfo?.role === 'customer' || !userInfo) && (
                     <Route path='/' element={<CustomerHomeScreen />} excat />
                   )}
+                  <Route
+                    path='/search/:keyword'
+                    element={<CustomerHomeScreen />}
+                  />
+
                   {userInfo && userInfo?.role === 'farmer' && (
                     <Route
                       path='/'
@@ -85,15 +90,34 @@ const App = () => {
                     element={<CustomerHomeScreen />}
                     excat
                   />
+                  <Route
+                    path='/products/search/:keyword'
+                    element={<CustomerHomeScreen />}
+                  />
                   <Route path='/farmers' element={<FarmersScreen />} excat />
+                  <Route
+                    path='/farmers/search/:keyword'
+                    element={<FarmersScreen />}
+                  />
+
                   <Route
                     path='/product/:id/farmers'
                     element={<FarmersByProductScreen />}
                   />
                   <Route
+                    path='/product/:id/farmers/search/:keyword'
+                    element={<FarmersByProductScreen />}
+                  />
+
+                  <Route
                     path='/farmer/:id/products'
                     element={<ProductsByFarmerScreen />}
                   />
+                  <Route
+                    path='/farmer/:id/products/search/:keyword'
+                    element={<ProductsByFarmerScreen />}
+                  />
+
                   <Route
                     path='/farmer-product/:id'
                     element={<FarmerProductScreen />}

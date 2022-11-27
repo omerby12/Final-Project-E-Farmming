@@ -9,9 +9,9 @@ const initialProductsState = {
 
 export const getProducts = createAsyncThunk(
   'product/getProducts',
-  async (_, { rejectWithValue }) => {
+  async ({ keyword = '' }, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get('/api/products');
+      const { data } = await axios.get(`/api/products?keyword=${keyword}`);
       return data;
     } catch (error) {
       if (error.response && error.response.data.message) {

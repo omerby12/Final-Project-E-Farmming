@@ -7,7 +7,15 @@ import Farmer from '../models/farmerModel.js';
 // @route GET /api/products
 // @access Public
 const getProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({});
+  const keyword = req.query.keyword
+    ? {
+        name: {
+          $regex: req.query.keyword,
+          $options: 'i',
+        },
+      }
+    : {};
+  const products = await Product.find({ ...keyword });
   res.json(products);
 });
 
@@ -33,6 +41,7 @@ const getFarmerProductsByProduct = asyncHandler(async (req, res) => {
   })
     .populate('farmer')
     .populate('product');
+
   if (farmerProducts.length > 0) {
     res.json(farmerProducts);
   } else {

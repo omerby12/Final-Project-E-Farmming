@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import Product from '../../components/Cards/Product';
 import Message from '../../components/UI/Message';
@@ -11,12 +12,12 @@ import {
 
 const CustomerHomeScreen = () => {
   const dispatch = useDispatch();
-
+  const { keyword } = useParams();
   const productsState = useSelector((state) => state.products);
   const { loading, error, products } = productsState;
   useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
+    dispatch(getProducts({ keyword }));
+  }, [dispatch, keyword]);
 
   useEffect(() => {
     return () => dispatch(productsActions.clearProductsData());

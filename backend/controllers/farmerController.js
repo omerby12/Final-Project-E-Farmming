@@ -28,11 +28,25 @@ const getFarmerByUserId = asyncHandler(async (req, res) => {
 // @route GET /api/farmers/:id/products
 // @access Public
 const getFarmerProductsByFarmer = asyncHandler(async (req, res) => {
+  const keyword = req.query.keyword
+    ? {
+        name: {
+          $regex: req.query.keyword,
+          $options: 'i',
+        },
+      }
+    : {};
+
   const farmerProducts = await FarmerProduct.find({ farmer: req.params.id })
     .populate('farmer')
-    .populate('product');
-  if (farmerProducts.length > 0) {
-    res.json(farmerProducts);
+    .populate({ path: 'product', match: { ...keyword } });
+
+  const farmerProductsResult = farmerProducts.filter(function (farmerProduct) {
+    return farmerProduct.product !== null;
+  });
+
+  if (farmerProductsResult.length > 0) {
+    res.json(farmerProductsResult);
   } else {
     res.status(404);
     throw new Error('Farmer Products not found');

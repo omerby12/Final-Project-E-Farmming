@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import ProductByFarmer from '../../components/Cards/ProductByFarmer';
 import Message from '../../components/UI/Message';
@@ -13,13 +13,13 @@ import {
 
 const ProductsByFarmerScreen = () => {
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const { id, keyword } = useParams();
 
   const productsByFarmerState = useSelector((state) => state.productsByFarmer);
   const { loading, error, productsByFarmer } = productsByFarmerState;
   useEffect(() => {
-    dispatch(getProductsByFarmer({ id }));
-  }, [dispatch, id]);
+    dispatch(getProductsByFarmer({ id, keyword }));
+  }, [dispatch, id, keyword]);
 
   useEffect(() => {
     return () => dispatch(productsByFarmerActions.clearProductsByFarmerData());

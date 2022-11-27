@@ -85,7 +85,7 @@ export const registerCustomer = createAsyncThunk(
 
 export const registerFarmer = createAsyncThunk(
   'user/userRegisterFarmer',
-  async ({ name, email, password, farmName }, { rejectWithValue }) => {
+  async ({ name, email, password, farmName, image }, { rejectWithValue }) => {
     try {
       const config = {
         headers: {
@@ -94,7 +94,7 @@ export const registerFarmer = createAsyncThunk(
       };
       const { data } = await axios.post(
         '/api/users/register/farmer',
-        { name, email, password, farmName },
+        { name, email, password, farmName, image },
         config
       );
       localStorage.setItem('userInfo', JSON.stringify(data));

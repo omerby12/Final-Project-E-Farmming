@@ -21,6 +21,8 @@ import userSessionReducer from '../features/userSession/userSessionSlice';
 import orderCreateReducer from '../features/order/orderCreateSlice';
 import orderDetailsReducer from '../features/order/orderDetailsSlice';
 import subOrderDetailsReducer from '../features/order/subOrderDetailsSlice';
+import subOrderDeliverReducer from '../features/order/subOrderDeliverSlice';
+import subOrderListByFarmerReducer from '../features/order/subOrderListByFarmerSlice';
 import orderPayReducer from '../features/order/orderPaySlice';
 import orderListMyReducer from '../features/order/orderListMySlice';
 import farmerByUserReducer from '../features/farmer/farmerByUserSlice';
@@ -59,6 +61,8 @@ export const store = configureStore({
     orderCreate: orderCreateReducer,
     orderDetails: orderDetailsReducer,
     subOrderDetails: subOrderDetailsReducer,
+    subOrderDeliver: subOrderDeliverReducer,
+    subOrderListByFarmer: subOrderListByFarmerReducer,
     orderPay: orderPayReducer,
     orderListMy: orderListMyReducer,
     farmerByUser: farmerByUserReducer,

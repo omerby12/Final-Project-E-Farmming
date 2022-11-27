@@ -7,6 +7,15 @@ const subOrderSchema = mongoose.Schema(
       required: true,
       ref: 'User',
     },
+    farmer: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'Farmer',
+    },
+    order: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Order',
+    },
     orderItems: [
       {
         farmerId: {
@@ -41,6 +50,17 @@ const subOrderSchema = mongoose.Schema(
       type: Boolean,
       required: true,
       default: false,
+    },
+    deliveredAt: {
+      type: Date,
+    },
+    isPaid: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    paidAt: {
+      type: Date,
     },
   },
   {

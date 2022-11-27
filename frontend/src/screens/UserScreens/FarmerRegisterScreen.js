@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
@@ -16,6 +17,9 @@ const FarmerRegisterScreen = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [farmName, setFarmName] = useState('');
+
+  const [image, setImage] = useState('');
+  const [uploading, setUploading] = useState(false);
 
   const [message, setMessage] = useState(null);
 
@@ -37,12 +41,35 @@ const FarmerRegisterScreen = () => {
     return () => dispatch(userActions.clearUserData());
   }, [dispatch]);
 
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('image', file);
+    setUploading(true);
+
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+
+      const { data } = await axios.post('/api/upload', formData, config);
+
+      setImage(data);
+      setUploading(false);
+    } catch (error) {
+      console.error(error);
+      setUploading(false);
+    }
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       setMessage('Passwords do not match');
     } else {
-      dispatch(registerFarmer({ name, email, password, farmName }));
+      dispatch(registerFarmer({ name, email, password, farmName, image }));
     }
   };
 
@@ -101,6 +128,24 @@ const FarmerRegisterScreen = () => {
             value={farmName}
             onChange={(e) => setFarmName(e.target.value)}
           ></Form.Control>
+        </Form.Group>
+
+        <Form.Group className='mt-2' controlId='image'>
+          <Form.Label>Image</Form.Label>
+          <Form.Control
+            type='text'
+            placeholder='Enter image url'
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+          ></Form.Control>
+          <Form.Control
+            type='file'
+            id='image-file'
+            label='Choose file'
+            custom
+            onChange={uploadFileHandler}
+          />
+          {uploading && <Loader />}
         </Form.Group>
 
         <Button className='mt-3 btn-green' type='submit' variant='primary'>

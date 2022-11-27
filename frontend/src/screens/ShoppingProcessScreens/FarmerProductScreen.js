@@ -35,7 +35,9 @@ const FarmerProductScreen = () => {
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
-        <FarmerProduct farmerProduct={farmerProduct} />
+        Object.keys(farmerProduct).length > 0 && (
+          <FarmerProduct farmerProduct={farmerProduct} />
+        )
       )}
     </React.Fragment>
   );

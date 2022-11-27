@@ -31,6 +31,7 @@ import SubOrderScreen from './screens/CheckoutProcessScreens/SubOrderScreen';
 import FarmerProductListScreen from './screens/FarmerUserScreens/FarmerProductListScreen';
 import FarmerProductCreateScreen from './screens/FarmerUserScreens/FarmerProductCreateScreen';
 import FarmerProductEditScreen from './screens/FarmerUserScreens/FarmerProductEditScreen';
+import FarmerOrderListScreen from './screens/FarmerUserScreens/FarmerOrderListScreen';
 
 import AdminProductListScreen from './screens/AdminScreens/AdminProductListScreen';
 import ProductEditScreen from './screens/AdminScreens/ProductEditScreen';
@@ -131,6 +132,11 @@ const App = () => {
                   <Route
                     path='/farmer/farmerproduct/:id/edit'
                     element={<FarmerProductEditScreen />}
+                  />
+
+                  <Route
+                    path='/farmer/orderlist'
+                    element={<FarmerOrderListScreen />}
                   />
 
                   <Route

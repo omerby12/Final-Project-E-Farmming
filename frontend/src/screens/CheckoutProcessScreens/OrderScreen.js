@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
 import Order from '../../components/Order/Order';
 import Message from '../../components/UI/Message';
 import Loader from '../../components/UI/Loader';
@@ -23,11 +21,6 @@ const OrderScreen = () => {
 
   return (
     <React.Fragment>
-      <LinkContainer to={`/myorders`}>
-        <Button className='btn btn-light my-3' variant='light'>
-          My Orders
-        </Button>
-      </LinkContainer>
       {loading ? (
         <Loader />
       ) : error ? (

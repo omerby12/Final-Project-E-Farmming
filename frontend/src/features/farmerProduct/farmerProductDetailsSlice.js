@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const initialFarmerProductDetailsState = {
   farmerProduct: {},
-  loading: true,
+  loading: false,
   error: null,
 };
 

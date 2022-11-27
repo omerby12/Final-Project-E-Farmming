@@ -18,7 +18,9 @@ const SubOrderInfoShipping = ({ subOrder }) => {
         {subOrder.shippingAddress.city} {subOrder.shippingAddress.postalCode}
       </p>
       {subOrder.isDelivered ? (
-        <Message variant='success'>Delivered on {subOrder.deliveredAt}</Message>
+        <Message variant='success'>
+          Order was out for delivery on {subOrder.deliveredAt}
+        </Message>
       ) : (
         <Message variant='danger'>Not Delivered</Message>
       )}

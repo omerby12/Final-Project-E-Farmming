@@ -62,7 +62,7 @@ const registerCustomer = asyncHandler(async (req, res) => {
 // @route   POST /api/users/register/farmer
 // @access  Public
 const registerFarmer = asyncHandler(async (req, res) => {
-  const { name, email, password, farmName } = req.body;
+  const { name, email, password, farmName, image } = req.body;
 
   const userExists = await User.findOne({ email });
 
@@ -88,7 +88,7 @@ const registerFarmer = asyncHandler(async (req, res) => {
   const farmer = await Farmer.create({
     user: user._id,
     farmName: farmName,
-    image: '/images/the-galilee-market.jpg',
+    image: image,
     reviews: [],
     rating: 0,
     numReviews: 0,

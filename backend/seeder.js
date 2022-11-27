@@ -10,6 +10,7 @@ import farmerProducts from './data/farmer-products.js';
 import User from './models/userModel.js';
 import Product from './models/productModel.js';
 import Order from './models/orderModel.js';
+import SubOrder from './models/subOrderModel.js';
 import Farmer from './models/farmerModel.js';
 import FarmerProduct from './models/farmerProductModel.js';
 
@@ -81,6 +82,8 @@ const importData = async () => {
 const destroyData = async () => {
   try {
     await Order.deleteMany();
+    await SubOrder.deleteMany();
+
     await Product.deleteMany();
     await User.deleteMany();
     await Farmer.deleteMany();

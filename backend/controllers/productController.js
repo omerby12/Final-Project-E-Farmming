@@ -36,14 +36,27 @@ const getProductById = asyncHandler(async (req, res) => {
 // @route GET /api/products/:id/farmers
 // @access Public
 const getFarmerProductsByProduct = asyncHandler(async (req, res) => {
+  const keyword = req.query.keyword
+    ? {
+        farmName: {
+          $regex: req.query.keyword,
+          $options: 'i',
+        },
+      }
+    : {};
+
   const farmerProducts = await FarmerProduct.find({
     product: req.params.id,
   })
-    .populate('farmer')
+    .populate({ path: 'farmer', match: { ...keyword } })
     .populate('product');
 
-  if (farmerProducts.length > 0) {
-    res.json(farmerProducts);
+  const farmerProductsResult = farmerProducts.filter(function (farmerProduct) {
+    return farmerProduct.farmer !== null;
+  });
+
+  if (farmerProductsResult.length > 0) {
+    res.json(farmerProductsResult);
   } else {
     res.status(404);
     throw new Error('Farmer Products not found');

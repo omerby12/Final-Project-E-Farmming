@@ -9,9 +9,11 @@ const initialFarmersByProductState = {
 
 export const getFarmersByProduct = createAsyncThunk(
   'farmer/getFarmersByProduct',
-  async ({ id }, { rejectWithValue }) => {
+  async ({ id, keyword = '' }, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get(`/api/products/${id}/farmers`);
+      const { data } = await axios.get(
+        `/api/products/${id}/farmers?keyword=${keyword}`
+      );
       return data;
     } catch (error) {
       if (error.response && error.response.data.message) {

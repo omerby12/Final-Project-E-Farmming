@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import Farmer from '../../components/Cards/Farmer';
 import Message from '../../components/UI/Message';
@@ -8,12 +9,14 @@ import { getFarmers } from '../../features/farmer/farmersSlice';
 
 const FarmersScreen = () => {
   const dispatch = useDispatch();
+  const { keyword } = useParams();
 
   const farmersState = useSelector((state) => state.farmers);
   const { loading, error, farmers } = farmersState;
+
   useEffect(() => {
-    dispatch(getFarmers());
-  }, [dispatch]);
+    dispatch(getFarmers({ keyword }));
+  }, [dispatch, keyword]);
 
   return (
     <React.Fragment>

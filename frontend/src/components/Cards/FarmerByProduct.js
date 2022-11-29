@@ -16,7 +16,7 @@ const FarmerByProduct = ({ farmerByProduct }) => {
       <Card.Body>
         <Link to={`/farmer-product/${farmerByProduct._id}`}>
           <Card.Title as='div'>
-            <strong>{farmerByProduct.farmer.name}</strong>
+            <strong>{farmerByProduct.farmer.farmName}</strong>
           </Card.Title>
         </Link>
       </Card.Body>

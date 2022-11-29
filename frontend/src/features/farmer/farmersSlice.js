@@ -9,9 +9,9 @@ const initialFarmersState = {
 
 export const getFarmers = createAsyncThunk(
   'farmer/getFarmers',
-  async (_, { rejectWithValue }) => {
+  async ({ keyword = '' }, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get('/api/farmers');
+      const { data } = await axios.get(`/api/farmers?keyword=${keyword}`);
       return data;
     } catch (error) {
       if (error.response && error.response.data.message) {

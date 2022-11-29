@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import ProductByFarmer from '../../components/Cards/ProductByFarmer';
 import Message from '../../components/UI/Message';
 import Loader from '../../components/UI/Loader';
-import GoBack from '../../components/UI/GoBack';
 import {
   getProductsByFarmer,
   productsByFarmerActions,
@@ -27,7 +26,9 @@ const ProductsByFarmerScreen = () => {
 
   return (
     <React.Fragment>
-      <GoBack />
+      <Link className='btn btn-light my-3' to='/farmers'>
+        Go Back
+      </Link>
       {loading ? (
         <Loader />
       ) : error ? (

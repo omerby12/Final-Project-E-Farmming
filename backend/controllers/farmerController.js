@@ -7,7 +7,15 @@ import Farmer from '../models/farmerModel.js';
 // @route GET /api/farmers
 // @access Public
 const getFarmers = asyncHandler(async (req, res) => {
-  const farmers = await Farmer.find({});
+  const keyword = req.query.keyword
+    ? {
+        farmName: {
+          $regex: req.query.keyword,
+          $options: 'i',
+        },
+      }
+    : {};
+  const farmers = await Farmer.find({ ...keyword });
   res.json(farmers);
 });
 

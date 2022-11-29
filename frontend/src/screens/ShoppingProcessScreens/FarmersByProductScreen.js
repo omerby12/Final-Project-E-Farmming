@@ -1,26 +1,29 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
 import FarmerByProduct from '../../components/Cards/FarmerByProduct';
 import Message from '../../components/UI/Message';
 import Loader from '../../components/UI/Loader';
-import GoBack from '../../components/UI/GoBack';
 import { getFarmersByProduct } from '../../features/farmer/farmersByProductSlice';
 
 const FarmersByProductScreen = () => {
   const dispatch = useDispatch();
-  const { id } = useParams();
+
+  const { id, keyword } = useParams();
 
   const farmersByProductState = useSelector((state) => state.farmersByProduct);
   const { loading, error, farmersByProduct } = farmersByProductState;
+
   useEffect(() => {
-    dispatch(getFarmersByProduct({ id }));
-  }, [dispatch, id]);
+    dispatch(getFarmersByProduct({ id, keyword }));
+  }, [dispatch, id, keyword]);
 
   return (
     <React.Fragment>
-      <GoBack />
+      <Link className='btn btn-light my-3' to='/'>
+        Go Back
+      </Link>
       {loading ? (
         <Loader />
       ) : error ? (

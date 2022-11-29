@@ -42,7 +42,7 @@ const AdminProductListScreen = () => {
     if (successCreate) {
       navigate(`/admin/product/${createdProduct._id}/edit`);
     } else {
-      dispatch(getProducts());
+      dispatch(getProducts({}));
     }
   }, [dispatch, navigate, userInfo, successCreate, createdProduct]);
 

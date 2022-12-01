@@ -75,7 +75,7 @@ const getFarmerProductsByFarmer = asyncHandler(async (req, res) => {
 });
 
 // @desc    Create new review
-// @route   POST /api/farmers/:id/reviews
+// @route   PUT /api/farmers/:id/reviews
 // @access  Private
 const createFarmerReview = asyncHandler(async (req, res) => {
   const { rating, comment } = req.body;

@@ -19,7 +19,7 @@ export const farmerReviewCreate = createAsyncThunk(
         },
       };
 
-      const { data } = axios.post(
+      const { data } = await axios.put(
         `/api/farmers/${farmerId}/reviews`,
         review,
         config
@@ -50,7 +50,7 @@ const farmerReviewCreateSlice = createSlice({
     [farmerReviewCreate.pending]: (state) => {
       state.loading = true;
     },
-    [farmerReviewCreate.fulfilled]: (state) => {
+    [farmerReviewCreate.fulfilled]: (state, { payload }) => {
       state.success = true;
       state.loading = false;
       state.error = null;

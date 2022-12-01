@@ -4,11 +4,16 @@ import { Link, useParams } from 'react-router-dom';
 import { ListGroup, Button, Form } from 'react-bootstrap';
 import Message from '../../components/UI/Message';
 import Loader from '../../components/UI/Loader';
-import { farmerReviewCreate } from '../../features/farmer/farmerReviewCreateSlice';
+import {
+  farmerReviewCreate,
+  farmerReviewCreateActions,
+} from '../../features/farmer/farmerReviewCreateSlice';
+import { getFarmer } from '../../features/farmer/farmerSlice';
 
 const NewFarmerReview = () => {
   const dispatch = useDispatch();
-  const { id: farmerId } = useParams();
+  const { id } = useParams();
+
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
 
@@ -19,16 +24,25 @@ const NewFarmerReview = () => {
     (state) => state.farmerReviewCreate
   );
 
-  const { success, loading, error } = farmerReviewCreateState;
+  const { success, loading, error, farmer } = farmerReviewCreateState;
 
   useEffect(() => {
     if (success) {
       setRating(0);
       setComment('');
+      dispatch(farmerReviewCreateActions.clearFarmerReviewCreateData());
+      dispatch(getFarmer({ id }));
     }
-  }, [dispatch, success]);
+  }, [dispatch, success, id, farmer]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(farmerReviewCreateActions.clearFarmerReviewCreateData());
+    };
+  }, [dispatch]);
 
   const submitHandler = (e) => {
+    const farmerId = id;
     e.preventDefault();
     const review = {
       rating,

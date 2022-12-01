@@ -10,7 +10,7 @@ const FarmerReviews = ({ farmer }) => {
       <h2>Reviews</h2>
       {farmer.reviews.length === 0 && <Message>No Reviews</Message>}
       <ListGroup variant='flush'>
-        <FarmerReviewsList />
+        <FarmerReviewsList farmer={farmer} />
         <NewFarmerReview />
       </ListGroup>
     </Col>

@@ -6,7 +6,7 @@ const FarmerReviewsList = ({ farmer }) => {
   return (
     <React.Fragment>
       {farmer.reviews.map((review) => (
-        <ListGroup.Item key={review._id}>
+        <ListGroup.Item key={review._id} className='p-4'>
           <strong>{review.name}</strong>
           <Rating value={review.rating} />
           <p>{review.createdAt.substring(0, 10)}</p>

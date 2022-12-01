@@ -11,8 +11,8 @@ import {
 import { protect, farmer } from '../middleware/authMiddleware.js';
 
 router.route('/').get(getFarmers);
+router.route('/:id/reviews').put(protect, createFarmerReview);
 router.route('/:id').get(getFarmer);
-router.route('/:id/reviews').post(protect, createFarmerReview);
 router.route('/user/:id').get(protect, farmer, getFarmerByUserId);
 router.route('/:id/products').get(getFarmerProductsByFarmer);
 

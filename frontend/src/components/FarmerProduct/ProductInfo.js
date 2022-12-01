@@ -3,7 +3,7 @@ import { Col, Image, ListGroup } from 'react-bootstrap';
 
 const ProductInfo = ({ farmerProduct }) => {
   return (
-    <Col md={3}>
+    <Col md={3} className='rounded text-center'>
       <ListGroup variant='flush'>
         <ListGroup.Item>
           <Image

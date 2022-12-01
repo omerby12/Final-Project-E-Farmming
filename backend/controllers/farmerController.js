@@ -19,9 +19,22 @@ const getFarmers = asyncHandler(async (req, res) => {
   res.json(farmers);
 });
 
-// @desc Fetch single farmer by user id
+// @desc Fetch single farmer by id
 // @route GET /api/farmers/:id
 // @access Public
+const getFarmer = asyncHandler(async (req, res) => {
+  const farmer = await Farmer.findById(req.params.id);
+  if (farmer) {
+    res.json(farmer);
+  } else {
+    res.status(404);
+    throw new Error('Farmer not found');
+  }
+});
+
+// @desc Fetch single farmer by user id
+// @route GET /api/farmers/user/:id
+// @access Private/Farmer
 const getFarmerByUserId = asyncHandler(async (req, res) => {
   const farmer = await Farmer.findOne({ user: req.params.id });
   if (farmer) {
@@ -61,4 +74,51 @@ const getFarmerProductsByFarmer = asyncHandler(async (req, res) => {
   }
 });
 
-export { getFarmers, getFarmerByUserId, getFarmerProductsByFarmer };
+// @desc    Create new review
+// @route   POST /api/farmers/:id/reviews
+// @access  Private
+const createFarmerReview = asyncHandler(async (req, res) => {
+  const { rating, comment } = req.body;
+
+  const farmer = await Farmer.findById(req.params.id);
+
+  if (farmer) {
+    const alreadyReviewed = farmer.reviews.find(
+      (r) => r.user.toString() === req.user._id.toString()
+    );
+
+    if (alreadyReviewed) {
+      res.status(400);
+      throw new Error('Farmer already reviewed');
+    }
+
+    const review = {
+      name: req.user.name,
+      rating: Number(rating),
+      comment,
+      user: req.user._id,
+    };
+
+    farmer.reviews.push(review);
+
+    farmer.numReviews = farmer.reviews.length;
+
+    farmer.rating =
+      farmer.reviews.reduce((acc, item) => item.rating + acc, 0) /
+      farmer.reviews.length;
+
+    await farmer.save();
+    res.status(201).json({ message: 'Review added' });
+  } else {
+    res.status(404);
+    throw new Error('Farmer not found');
+  }
+});
+
+export {
+  getFarmers,
+  getFarmer,
+  getFarmerByUserId,
+  getFarmerProductsByFarmer,
+  createFarmerReview,
+};

@@ -6,7 +6,11 @@ import productCreateReducer from '../features/product/productCreateSlice';
 import productUpdateReducer from '../features/product/productUpdateSlice';
 
 import farmersReducer from '../features/farmer/farmersSlice';
+import farmerReducer from '../features/farmer/farmerSlice';
 import farmersByProductReducer from '../features/farmer/farmersByProductSlice';
+import farmerByUserReducer from '../features/farmer/farmerByUserSlice';
+import farmerReviewCreateReducer from '../features/farmer/farmerReviewCreateSlice';
+
 import farmerProductReducer from '../features/farmerProduct/farmerProductDetailsSlice';
 import farmerProductCreateReducer from '../features/farmerProduct/farmerProductCreateSlice';
 import farmerProductUpdateReducer from '../features/farmerProduct/farmerProductUpdateSlice';
@@ -25,7 +29,6 @@ import subOrderDeliverReducer from '../features/order/subOrderDeliverSlice';
 import subOrderListByFarmerReducer from '../features/order/subOrderListByFarmerSlice';
 import orderPayReducer from '../features/order/orderPaySlice';
 import orderListMyReducer from '../features/order/orderListMySlice';
-import farmerByUserReducer from '../features/farmer/farmerByUserSlice';
 import searchBoxReducer from '../features/search/searchBoxSlice';
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')
@@ -49,7 +52,10 @@ export const store = configureStore({
     productCreate: productCreateReducer,
     productUpdate: productUpdateReducer,
     farmers: farmersReducer,
+    farmer: farmerReducer,
     farmersByProduct: farmersByProductReducer,
+    farmerByUser: farmerByUserReducer,
+    farmerReviewCreate: farmerReviewCreateReducer,
     farmerProduct: farmerProductReducer,
     farmerProductCreate: farmerProductCreateReducer,
     farmerProductUpdate: farmerProductUpdateReducer,
@@ -66,7 +72,6 @@ export const store = configureStore({
     subOrderListByFarmer: subOrderListByFarmerReducer,
     orderPay: orderPayReducer,
     orderListMy: orderListMyReducer,
-    farmerByUser: farmerByUserReducer,
     searchBox: searchBoxReducer,
   },
   preloadedState: initialState,

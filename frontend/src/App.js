@@ -13,6 +13,7 @@ import FarmersScreen from './screens/ShoppingProcessScreens/FarmersScreen';
 import FarmersByProductScreen from './screens/ShoppingProcessScreens/FarmersByProductScreen';
 import ProductsByFarmerScreen from './screens/ShoppingProcessScreens/ProductsByFarmerScreen';
 import FarmerProductScreen from './screens/ShoppingProcessScreens/FarmerProductScreen';
+import FarmerScreen from './screens/ShoppingProcessScreens/FarmerScreen';
 
 import CartScreen from './screens/CartScreens/CartScreen';
 
@@ -122,6 +123,9 @@ const App = () => {
                     path='/farmer-product/:id'
                     element={<FarmerProductScreen />}
                   />
+
+                  <Route path='/farmer/:id' element={<FarmerScreen />} />
+
                   <Route path='/cart/' element={<CartScreen />} />
                   <Route path='/cart/:id' element={<CartScreen />} />
                   <Route path='/login' element={<LoginScreen />} />

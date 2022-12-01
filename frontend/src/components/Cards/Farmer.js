@@ -17,7 +17,9 @@ const Farmer = ({ farmer }) => {
         </Link>
       </Card.Body>
       <Card.Text as='div'>
-        <Rating value={farmer.rating} text={`${farmer.numReviews} reviews`} />
+        <Link to={`/farmer/${farmer._id}`}>
+          <Rating value={farmer.rating} text={`${farmer.numReviews} reviews`} />
+        </Link>
       </Card.Text>
     </Card>
   );

@@ -21,10 +21,12 @@ const FarmerByProduct = ({ farmerByProduct }) => {
         </Link>
       </Card.Body>
       <Card.Text as='div'>
-        <Rating
-          value={farmerByProduct.farmer.rating}
-          text={`${farmerByProduct.farmer.numReviews} reviews`}
-        />
+        <Link to={`/farmer/${farmerByProduct.farmer._id}`}>
+          <Rating
+            value={farmerByProduct.farmer.rating}
+            text={`${farmerByProduct.farmer.numReviews} reviews`}
+          />
+        </Link>
       </Card.Text>
       <Card.Text as='h3'>{farmerByProduct.price}₪/kg</Card.Text>
     </Card>

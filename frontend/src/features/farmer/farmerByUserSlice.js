@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const initialFarmerByUserState = {
   farmer: {},
-  loading: true,
+  loading: false,
   error: null,
 };
 
@@ -17,7 +17,7 @@ export const getFarmerByUser = createAsyncThunk(
           Authorization: `Bearer ${userInfo.token}`,
         },
       };
-      const { data } = await axios.get(`/api/farmers/${id}`, config);
+      const { data } = await axios.get(`/api/farmers/user/${id}`, config);
       return data;
     } catch (error) {
       if (error.response && error.response.data.message) {

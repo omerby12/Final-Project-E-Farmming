@@ -5,13 +5,17 @@ const initialProductsState = {
   products: [],
   loading: false,
   error: null,
+  pages: null,
+  page: null,
 };
 
 export const getProducts = createAsyncThunk(
   'product/getProducts',
-  async ({ keyword = '' }, { rejectWithValue }) => {
+  async ({ keyword = '', pageNumber = '' }, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get(`/api/products?keyword=${keyword}`);
+      const { data } = await axios.get(
+        `/api/products?keyword=${keyword}&pageNumber=${pageNumber}`
+      );
       return data;
     } catch (error) {
       if (error.response && error.response.data.message) {
@@ -31,6 +35,8 @@ const productsSlice = createSlice({
       state.loading = false;
       state.products = [];
       state.error = null;
+      state.pages = null;
+      state.page = null;
     },
   },
   extraReducers: {
@@ -39,9 +45,13 @@ const productsSlice = createSlice({
       state.loading = true;
       state.products = [];
       state.error = null;
+      state.pages = null;
+      state.page = null;
     },
     [getProducts.fulfilled]: (state, { payload }) => {
-      state.products = payload;
+      state.products = payload.products;
+      state.pages = payload.pages;
+      state.page = payload.page;
       state.loading = false;
       state.error = null;
     },
@@ -49,6 +59,8 @@ const productsSlice = createSlice({
       state.loading = false;
       state.error = payload;
       state.products = [];
+      state.pages = null;
+      state.page = null;
     },
   },
 });

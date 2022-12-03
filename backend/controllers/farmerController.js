@@ -1,4 +1,5 @@
 import asyncHandler from 'express-async-handler';
+import paginate from '../utils/paginate.js';
 import Product from '../models/productModel.js';
 import FarmerProduct from '../models/farmerProductModel.js';
 import Farmer from '../models/farmerModel.js';
@@ -49,6 +50,9 @@ const getFarmerByUserId = asyncHandler(async (req, res) => {
 // @route GET /api/farmers/:id/products
 // @access Public
 const getFarmerProductsByFarmer = asyncHandler(async (req, res) => {
+  const pageSize = 2;
+  const page = Number(req.query.pageNumber) || 1;
+
   const keyword = req.query.keyword
     ? {
         name: {
@@ -67,7 +71,7 @@ const getFarmerProductsByFarmer = asyncHandler(async (req, res) => {
   });
 
   if (farmerProductsResult.length > 0) {
-    res.json(farmerProductsResult);
+    res.json(paginate(farmerProductsResult, 2, 2));
   } else {
     res.status(404);
     throw new Error('Farmer Products not found');

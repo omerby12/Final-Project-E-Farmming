@@ -86,6 +86,13 @@ const App = () => {
                       excat
                     />
                   )}
+                  {userInfo && userInfo?.role === 'admin' && (
+                    <Route
+                      path='/page/:pageNumber'
+                      element={<AdminProductListScreen />}
+                      excat
+                    />
+                  )}
                   <Route
                     path='/products'
                     element={<CustomerHomeScreen />}
@@ -95,6 +102,29 @@ const App = () => {
                     path='/products/search/:keyword'
                     element={<CustomerHomeScreen />}
                   />
+
+                  <Route
+                    path='/page/:pageNumber'
+                    element={<CustomerHomeScreen />}
+                    exact
+                  />
+                  <Route
+                    path='/search/:keyword/page/:pageNumber'
+                    element={<CustomerHomeScreen />}
+                    exact
+                  />
+
+                  <Route
+                    path='/products/page/:pageNumber'
+                    element={<CustomerHomeScreen />}
+                    exact
+                  />
+                  <Route
+                    path='/products/search/:keyword/page/:pageNumber'
+                    element={<CustomerHomeScreen />}
+                    exact
+                  />
+
                   <Route path='/farmers' element={<FarmersScreen />} excat />
                   <Route
                     path='/farmers/search/:keyword'
@@ -169,6 +199,10 @@ const App = () => {
 
                   <Route
                     path='/admin/productlist'
+                    element={<AdminProductListScreen />}
+                  />
+                  <Route
+                    path='/admin/productlist/page/:pageNumber'
                     element={<AdminProductListScreen />}
                   />
                   <Route

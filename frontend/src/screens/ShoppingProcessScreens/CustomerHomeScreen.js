@@ -14,8 +14,10 @@ import {
 const CustomerHomeScreen = () => {
   const dispatch = useDispatch();
   const { keyword, pageNumber = 1 } = useParams();
+
   const productsState = useSelector((state) => state.products);
   const { loading, error, products, page, pages } = productsState;
+
   useEffect(() => {
     dispatch(getProducts({ keyword, pageNumber }));
   }, [dispatch, keyword, pageNumber]);

@@ -5,14 +5,16 @@ const initialFarmersByProductState = {
   farmersByProduct: [],
   loading: false,
   error: null,
+  pages: null,
+  page: null,
 };
 
 export const getFarmersByProduct = createAsyncThunk(
   'farmer/getFarmersByProduct',
-  async ({ id, keyword = '' }, { rejectWithValue }) => {
+  async ({ id, keyword = '', pageNumber = '' }, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(
-        `/api/products/${id}/farmers?keyword=${keyword}`
+        `/api/products/${id}/farmers?keyword=${keyword}&pageNumber=${pageNumber}`
       );
       return data;
     } catch (error) {
@@ -35,9 +37,13 @@ const farmersByProductSlice = createSlice({
       state.loading = true;
       state.farmersByProduct = [];
       state.error = null;
+      state.pages = null;
+      state.page = null;
     },
     [getFarmersByProduct.fulfilled]: (state, { payload }) => {
-      state.farmersByProduct = payload;
+      state.farmersByProduct = payload.farmersByProduct;
+      state.pages = payload.pages;
+      state.page = payload.page;
       state.loading = false;
       state.error = null;
     },
@@ -45,6 +51,8 @@ const farmersByProductSlice = createSlice({
       state.loading = false;
       state.error = payload;
       state.farmersByProduct = [];
+      state.pages = null;
+      state.page = null;
     },
   },
 });

@@ -6,7 +6,13 @@ import CartSummary from './CartSummary';
 const Cart = ({ cartItems }) => {
   return (
     <React.Fragment>
-      <h1>Shopping Cart</h1>
+      <h1
+        style={{
+          'text-align': 'center',
+        }}
+      >
+        Shopping Cart
+      </h1>
       <Row>
         <CartItems cartItems={cartItems} />
         <CartSummary cartItems={cartItems} />

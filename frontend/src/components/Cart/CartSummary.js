@@ -10,19 +10,29 @@ const CartSummary = ({ cartItems }) => {
   };
 
   return (
-    <Col md={4}>
+    <Col md={12} xl={4}>
       <Card>
         <ListGroup variant='flush'>
           <ListGroup.Item>
-            <h2>
+            <h2
+              style={{
+                'text-align': 'center',
+              }}
+            >
               Subtotal (
               {cartItems.reduce((acc, item) => acc + Number(item.qty), 0)})
               items
             </h2>
-            {cartItems
-              .reduce((acc, item) => acc + item.qty * item.price, 0)
-              .toFixed(2)}
-            ₪
+            <div
+              style={{
+                'text-align': 'center',
+              }}
+            >
+              {cartItems
+                .reduce((acc, item) => acc + item.qty * item.price, 0)
+                .toFixed(2)}
+              ₪
+            </div>
           </ListGroup.Item>
           <ListGroup.Item>
             <Button

@@ -5,6 +5,7 @@ import { Row, Col } from 'react-bootstrap';
 import ProductByFarmer from '../../components/Cards/ProductByFarmer';
 import Message from '../../components/UI/Message';
 import Loader from '../../components/UI/Loader';
+import Paginate from '../../components/UI/Paginate';
 import {
   getProductsByFarmer,
   productsByFarmerActions,
@@ -12,13 +13,15 @@ import {
 
 const ProductsByFarmerScreen = () => {
   const dispatch = useDispatch();
-  const { id, keyword } = useParams();
+  const { id, keyword, pageNumber = 1 } = useParams();
 
   const productsByFarmerState = useSelector((state) => state.productsByFarmer);
-  const { loading, error, productsByFarmer } = productsByFarmerState;
+  const { loading, error, productsByFarmer, page, pages } =
+    productsByFarmerState;
+
   useEffect(() => {
-    dispatch(getProductsByFarmer({ id, keyword }));
-  }, [dispatch, id, keyword]);
+    dispatch(getProductsByFarmer({ id, keyword, pageNumber }));
+  }, [dispatch, id, keyword, pageNumber]);
 
   useEffect(() => {
     return () => dispatch(productsByFarmerActions.clearProductsByFarmerData());
@@ -34,13 +37,16 @@ const ProductsByFarmerScreen = () => {
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
-        <Row>
-          {productsByFarmer.map((productByFarmer) => (
-            <Col key={productByFarmer._id} sm={12} md={6} Lg={4} xl={3}>
-              <ProductByFarmer productByFarmer={productByFarmer} />
-            </Col>
-          ))}
-        </Row>
+        <React.Fragment>
+          <Row>
+            {productsByFarmer.map((productByFarmer) => (
+              <Col key={productByFarmer._id} sm={12} md={6} Lg={4} xl={3}>
+                <ProductByFarmer productByFarmer={productByFarmer} />
+              </Col>
+            ))}
+          </Row>
+          <Paginate total={pages} page={page} />
+        </React.Fragment>
       )}
     </React.Fragment>
   );

@@ -1,9 +1,10 @@
 import asyncHandler from 'express-async-handler';
+import paginate from '../utils/paginate.js';
 import Product from '../models/productModel.js';
 import FarmerProduct from '../models/farmerProductModel.js';
 import Farmer from '../models/farmerModel.js';
 
-// @desc Fetch all products
+// @desc Fetch products by keyword and page
 // @route GET /api/products
 // @access Public
 const getProducts = asyncHandler(async (req, res) => {
@@ -24,6 +25,14 @@ const getProducts = asyncHandler(async (req, res) => {
   res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
 
+// @desc    Fetch all products
+// @route   GET /api/products/all
+// @access  Public
+const getProductsAll = asyncHandler(async (req, res) => {
+  const products = await Product.find({});
+  res.json(products);
+});
+
 // @desc Fetch single product
 // @route GET /api/products/:id
 // @access Public
@@ -41,6 +50,8 @@ const getProductById = asyncHandler(async (req, res) => {
 // @route GET /api/products/:id/farmers
 // @access Public
 const getFarmerProductsByProduct = asyncHandler(async (req, res) => {
+  const pageSize = 8;
+  const page = Number(req.query.pageNumber) || 1;
   const keyword = req.query.keyword
     ? {
         farmName: {
@@ -61,7 +72,16 @@ const getFarmerProductsByProduct = asyncHandler(async (req, res) => {
   });
 
   if (farmerProductsResult.length > 0) {
-    res.json(farmerProductsResult);
+    const paginateFarmerProductsResult = paginate(
+      farmerProductsResult,
+      pageSize,
+      page
+    );
+    res.json({
+      farmersByProduct: paginateFarmerProductsResult,
+      page,
+      pages: Math.ceil(farmerProductsResult.length / pageSize),
+    });
   } else {
     res.status(404);
     throw new Error('Farmer Products not found');
@@ -99,6 +119,7 @@ const updateProduct = asyncHandler(async (req, res) => {
 
 export {
   getProducts,
+  getProductsAll,
   getProductById,
   getFarmerProductsByProduct,
   createProduct,

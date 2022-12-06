@@ -132,6 +132,17 @@ const App = () => {
                   />
 
                   <Route
+                    path='/farmers/page/:pageNumber'
+                    element={<FarmersScreen />}
+                    exact
+                  />
+                  <Route
+                    path='/farmers/search/:keyword/page/:pageNumber'
+                    element={<FarmersScreen />}
+                    exact
+                  />
+
+                  <Route
                     path='/product/:id/farmers'
                     element={<FarmersByProductScreen />}
                   />
@@ -141,12 +152,34 @@ const App = () => {
                   />
 
                   <Route
+                    path='/product/:id/farmers/page/:pageNumber'
+                    element={<FarmersByProductScreen />}
+                    exact
+                  />
+                  <Route
+                    path='/product/:id/farmers/search/:keyword/page/:pageNumber'
+                    element={<FarmersByProductScreen />}
+                    exact
+                  />
+
+                  <Route
                     path='/farmer/:id/products'
                     element={<ProductsByFarmerScreen />}
                   />
                   <Route
                     path='/farmer/:id/products/search/:keyword'
                     element={<ProductsByFarmerScreen />}
+                  />
+
+                  <Route
+                    path='/farmer/:id/products/page/:pageNumber'
+                    element={<ProductsByFarmerScreen />}
+                    exact
+                  />
+                  <Route
+                    path='/farmer/:id/products/search/:keyword/page/:pageNumber'
+                    element={<ProductsByFarmerScreen />}
+                    exact
                   />
 
                   <Route

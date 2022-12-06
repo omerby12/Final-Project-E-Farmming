@@ -8,6 +8,8 @@ import Farmer from '../models/farmerModel.js';
 // @route GET /api/farmers
 // @access Public
 const getFarmers = asyncHandler(async (req, res) => {
+  const pageSize = 8;
+  const page = Number(req.query.pageNumber) || 1;
   const keyword = req.query.keyword
     ? {
         farmName: {
@@ -16,8 +18,11 @@ const getFarmers = asyncHandler(async (req, res) => {
         },
       }
     : {};
-  const farmers = await Farmer.find({ ...keyword });
-  res.json(farmers);
+  const count = await Farmer.countDocuments({ ...keyword });
+  const farmers = await Farmer.find({ ...keyword })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+  res.json({ farmers, page, pages: Math.ceil(count / pageSize) });
 });
 
 // @desc Fetch single farmer by id
@@ -50,9 +55,8 @@ const getFarmerByUserId = asyncHandler(async (req, res) => {
 // @route GET /api/farmers/:id/products
 // @access Public
 const getFarmerProductsByFarmer = asyncHandler(async (req, res) => {
-  const pageSize = 2;
+  const pageSize = 8;
   const page = Number(req.query.pageNumber) || 1;
-
   const keyword = req.query.keyword
     ? {
         name: {
@@ -71,7 +75,16 @@ const getFarmerProductsByFarmer = asyncHandler(async (req, res) => {
   });
 
   if (farmerProductsResult.length > 0) {
-    res.json(paginate(farmerProductsResult, 2, 2));
+    const paginateFarmerProductsResult = paginate(
+      farmerProductsResult,
+      pageSize,
+      page
+    );
+    res.json({
+      productsByFarmer: paginateFarmerProductsResult,
+      page,
+      pages: Math.ceil(farmerProductsResult.length / pageSize),
+    });
   } else {
     res.status(404);
     throw new Error('Farmer Products not found');

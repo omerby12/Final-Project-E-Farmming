@@ -8,9 +8,9 @@ import GoBack from '../../components/UI/GoBack';
 import FormContainer from '../../components/UI/FormContainer';
 import { Typeahead } from 'react-bootstrap-typeahead';
 import {
-  getProducts,
-  productsActions,
-} from '../../features/product/productsSlice';
+  getProductsAll,
+  productsAllActions,
+} from '../../features/product/productsAllSlice';
 import { getFarmerByUser } from '../../features/farmer/farmerByUserSlice';
 
 import {
@@ -30,8 +30,8 @@ const FarmerProductCreateScreen = () => {
   const [priceError, setPriceError] = useState(null);
   const [countInStockError, setCountInStockError] = useState(null);
 
-  const productsState = useSelector((state) => state.products);
-  const { loading, error, products } = productsState;
+  const productsAllState = useSelector((state) => state.productsAll);
+  const { loading, error, products } = productsAllState;
 
   const userState = useSelector((state) => state.user);
   const { userInfo } = userState;
@@ -50,7 +50,7 @@ const FarmerProductCreateScreen = () => {
   } = farmerProductCreateState;
 
   useEffect(() => {
-    dispatch(getProducts());
+    dispatch(getProductsAll());
   }, [dispatch]);
 
   useEffect(() => {
@@ -70,7 +70,7 @@ const FarmerProductCreateScreen = () => {
 
   useEffect(() => {
     return () => {
-      dispatch(productsActions.clearProductsData());
+      dispatch(productsAllActions.clearProductsData());
       dispatch(farmerProductCreateActions.clearFarmerProductCreateData());
     };
   }, [dispatch]);

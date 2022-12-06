@@ -81,3 +81,9 @@ h3 {
     height: 10vh;
     object-fit: contain;
 }
+
+.product-img-cart-item {
+    width: 100%;
+    height: 10vh;
+    object-fit: contain;
+}

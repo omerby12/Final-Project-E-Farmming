@@ -6,7 +6,7 @@ import Message from '../UI/Message';
 
 const CartItems = ({ cartItems }) => {
   return (
-    <Col md={8}>
+    <Col xs={12} md={12} xl={8}>
       {cartItems.length === 0 ? (
         <Message>
           Your cart is empty <Link to='/'>Go Back</Link>

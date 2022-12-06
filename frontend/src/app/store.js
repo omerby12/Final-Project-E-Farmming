@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import productsReducer from '../features/product/productsSlice';
+import productsAllReducer from '../features/product/productsAllSlice';
 import productDetailsReducer from '../features/product/productDetailsSlice';
 import productsByFarmerReducer from '../features/product/productsByFarmerSlice';
 import productCreateReducer from '../features/product/productCreateSlice';
@@ -47,6 +48,7 @@ const initialState = {
 export const store = configureStore({
   reducer: {
     products: productsReducer,
+    productsAll: productsAllReducer,
     productDetails: productDetailsReducer,
     productsByFarmer: productsByFarmerReducer,
     productCreate: productCreateReducer,

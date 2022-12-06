@@ -21,7 +21,12 @@ const CartItem = ({ item }) => {
   return (
     <ListGroup.Item key={item.farmerProduct}>
       <Row>
-        <Col className='m-auto' md={2}>
+        <Col
+          className='d-flex justify-content-center align-items-center my-2 mx-auto'
+          xs={6}
+          md={2}
+          xl={2}
+        >
           <Image
             className='farmer-img-cart-item'
             src={item.farmerImage}
@@ -30,24 +35,57 @@ const CartItem = ({ item }) => {
             rounded
           />
         </Col>
-        <Col className='m-auto' md={2}>
-          <Image src={item.productImage} alt={item.productName} fluid rounded />
+        <Col
+          className='d-flex justify-content-center align-items-center my-2 mx-auto'
+          xs={6}
+          md={2}
+          xl={2}
+        >
+          <Image
+            className='product-img-cart-item'
+            src={item.productImage}
+            alt={item.productName}
+            fluid
+            rounded
+          />
         </Col>
-        <Col className='m-auto' md={2}>
+        <Col
+          className='d-flex justify-content-center align-items-center my-2 mx-auto text-center'
+          xs={6}
+          md={2}
+          xl={2}
+        >
           <Link to={`/farmer-product/${item.farmerProduct}`}>
             {item.farmerName}
           </Link>
         </Col>
 
-        <Col className='m-auto' md={1}>
+        <Col
+          className=' d-flex justify-content-center align-items-center my-2 mx-auto text-center'
+          xs={6}
+          md={1}
+          xl={1}
+        >
           <Link to={`/farmer-product/${item.farmerProduct}`}>
             {item.productName}
           </Link>
         </Col>
-        <Col className='m-auto mx-2 text-center' md={1}>
-          {item.price}₪
+
+        <Col
+          className=' d-flex justify-content-center align-items-center my-2 mx-auto text-center '
+          xs={12}
+          md={1}
+          xl={1}
+        >
+          <div>{item.price}₪</div>
         </Col>
-        <Col className='m-auto' md={2}>
+
+        <Col
+          className='d-flex justify-content-center align-items-center my-2 mx-auto'
+          xs={12}
+          md={2}
+          xl={2}
+        >
           <Form.Control
             as='select'
             value={item.qty}
@@ -60,8 +98,14 @@ const CartItem = ({ item }) => {
             ))}
           </Form.Control>
         </Col>
-        <Col className='m-auto' md={2}>
+        <Col
+          className='d-flex justify-content-center align-items-center my-2 mx-auto'
+          xs={12}
+          md={2}
+          xl={2}
+        >
           <Button
+            className='btn-block'
             type='button'
             ariant='light'
             onClick={() => removeFromCartHandler(item.farmerProduct)}

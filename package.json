@@ -5,6 +5,9 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
+    "setup-production": "npm run install-frontend && npm run build-frontend && npm install",
+    "install-frontend": "cd frontend && npm install",
+    "build-frontend": "cd frontend && npm run build",
     "start": "node backend/server",
     "server": "nodemon backend/server",
     "client": "npm start --prefix frontend",

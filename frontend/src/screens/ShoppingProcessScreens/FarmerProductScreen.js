@@ -5,6 +5,8 @@ import FarmerProduct from '../../components/FarmerProduct/FarmerProduct';
 import Message from '../../components/UI/Message';
 import Loader from '../../components/UI/Loader';
 import GoBack from '../../components/UI/GoBack';
+import Meta from '../../components/UI/Meta';
+
 import {
   getFarmerProductDetails,
   farmerProductDetailsActions,
@@ -29,6 +31,11 @@ const FarmerProductScreen = () => {
 
   return (
     <React.Fragment>
+      {Object.keys(farmerProduct).length > 0 && (
+        <Meta
+          title={`${farmerProduct.product.name} - ${farmerProduct.farmer.farmName}`}
+        />
+      )}
       <GoBack />
       {loading ? (
         <Loader />

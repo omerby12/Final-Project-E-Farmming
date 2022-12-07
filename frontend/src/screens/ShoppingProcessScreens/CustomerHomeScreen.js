@@ -6,6 +6,7 @@ import Product from '../../components/Cards/Product';
 import Message from '../../components/UI/Message';
 import Loader from '../../components/UI/Loader';
 import Paginate from '../../components/UI/Paginate';
+import Meta from '../../components/UI/Meta';
 import {
   getProducts,
   productsActions,
@@ -28,6 +29,7 @@ const CustomerHomeScreen = () => {
 
   return (
     <React.Fragment>
+      <Meta />
       {loading ? (
         <Loader />
       ) : error ? (

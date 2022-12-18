@@ -1,6 +1,6 @@
 # E-Farming: An E-Commerce System for Agricultural Products
 
-### [Demo URL: www.final-project-e-farming.onrender.com](http://www.final-project-e-farming.onrender.com)
+### [Demo URL: https://final-project-e-farming.onrender.com/](https://final-project-e-farming.onrender.com/)
 
 ![E-Farming](https://i.ibb.co/8X33KsB/HomePage.png)
 ![E-Farming](https://i.ibb.co/YkgS5Dv/Farmer-Page.png)
